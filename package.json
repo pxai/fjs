@@ -1,0 +1,27 @@
+{
+  "name": "fjs",
+  "version": "1.0.0",
+  "description": "Sample fp wiht JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pxai/fjs.git"
+  },
+  "author": "Pello Altadill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pxai/fjs/issues"
+  },
+  "homepage": "https://github.com/pxai/fjs#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "ramda": "^0.26.1",
+    "tachyon": "0.0.11"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
