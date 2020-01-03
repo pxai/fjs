@@ -1,11 +1,10 @@
 class Hello {
     constructor() {
         console.log("Constructor called");
-        var a;
     }
 
     sayHello() {
-        console.log("Hello yey!!");
+    console.log("Hello yey!!");
     }
 }
 
