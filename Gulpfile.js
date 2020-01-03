@@ -3,6 +3,7 @@ const minifyCSS = require('gulp-csso');
 const concat = require('gulp-concat');
 const del = require('del');
 const browsersync = require('browser-sync').create();
+const babel = require('gulp-babel');
 
 function html() {
   return src('src/**/index.html')
@@ -17,6 +18,9 @@ function css() {
 
 function js() {
   return src('src/app1/js/*.js', { sourcemaps: true, base: 'src/app1' })
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
     .pipe(concat('app.min.js'))
     .pipe(dest('dist/app1/js', { sourcemaps: true }))
 }

@@ -1,2 +1,13 @@
-console.log("Ok app1 working");
-// Hey
+class Hello {
+    constructor() {
+        console.log("Constructor called");
+    }
+
+    sayHello() {
+        console.log("Hello yey!!");
+    }
+}
+
+const hello = new Hello();
+
+hello.sayHello();
