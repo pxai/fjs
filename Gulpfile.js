@@ -5,6 +5,9 @@ const del = require('del');
 const browsersync = require('browser-sync').create();
 const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
+const browserify = require("browserify");
+const source = require("vinyl-source-stream");
+// const BABEL_POLYFILL = './node_modules/@babel/polyfill/browser.js';
 
 function html() {
   return src('src/**/index.html')
@@ -18,16 +21,23 @@ function css() {
 }
 
 function js() {
-  return src('src/app1/js/*.js', { sourcemaps: true, base: 'src/app1' })
+  return (browserify({entries: ['./src/app1/js/app.js']})
+    .transform("babelify", {presets: ["@babel/preset-env"]})
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(dest('./dist/app1/js')));
+}
+
+/*
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .pipe(babel({
-      presets: ['@babel/env']
+      presets: [['@babel/env' ]
+      ]
     }))
-    .pipe(concat('app.min.js'))
-    .pipe(dest('dist/app1/js', { sourcemaps: true }))
-}
+        .pipe(concat('app.min.js'))
+*/
 
 function clean() {
     return del(["dist"]);
@@ -64,5 +74,6 @@ function watchFiles() {
 exports.js = js;
 exports.css = css;
 exports.html = html;
-exports.build = series(clean, parallel(html, css, js));
-exports.default = parallel(watchFiles, browserSync);
+const build = series(clean, parallel(html, css, js));
+exports.default = series(build, parallel(watchFiles, browserSync));
+exports.build;
