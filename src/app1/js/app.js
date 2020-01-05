@@ -6,4 +6,4 @@ console.log(rootNode,"Ea")
 
 rootNode.appendChild(view({content: "Hello World"}));
 
-console.log("Joder!!!");
+console.log("Ok it works");

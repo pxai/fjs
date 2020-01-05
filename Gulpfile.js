@@ -3,11 +3,12 @@ const minifyCSS = require('gulp-csso');
 const concat = require('gulp-concat');
 const del = require('del');
 const browsersync = require('browser-sync').create();
-const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 const browserify = require("browserify");
 const source = require("vinyl-source-stream");
-// const BABEL_POLYFILL = './node_modules/@babel/polyfill/browser.js';
+const buffer = require("vinyl-buffer");
+const uglify = require("gulp-uglify");
+const sourcemaps = require("gulp-sourcemaps");
 
 function html() {
   return src('src/**/index.html')
@@ -25,22 +26,22 @@ function js() {
     .transform("babelify", {presets: ["@babel/preset-env"]})
     .bundle()
     .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(sourcemaps.write('./maps'))
     .pipe(dest('./dist/app1/js')));
 }
 
-/*
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(babel({
-      presets: [['@babel/env' ]
-      ]
-    }))
-        .pipe(concat('app.min.js'))
-*/
-
 function clean() {
     return del(["dist"]);
+}
+
+function test() {
+  return src('src/app1/js/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 }
 
 function browserSync(done) {
@@ -60,20 +61,17 @@ function browserSyncReload(done) {
 }
 
 function watchFiles() {
+  watch("./Gulpfile.js", series(build,browserSyncReload ));
   watch("./src/**/index.html", html);
   watch("./src/**/css/*", css);
   watch("./src/**/js/*", series(js));
-  watch(
-    [
-      "./dist/**/*",
-    ],
-    series(browserSyncReload)
-  );
+  watch(["./dist/**/*"],series(browserSyncReload));
 }
 
 exports.js = js;
 exports.css = css;
 exports.html = html;
 const build = series(clean, parallel(html, css, js));
+
 exports.default = series(build, parallel(watchFiles, browserSync));
 exports.build;
