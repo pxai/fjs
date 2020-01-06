@@ -22,13 +22,12 @@ function css() {
 }
 
 function js() {
-  return (browserify({entries: ['./src/app1/js/app.js']})
+  return (browserify({entries: ['./src/app1/js/init.js']})
     .transform("babelify", {presets: ["@babel/preset-env"]})
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init())
-    .pipe(uglify())
     .pipe(sourcemaps.write('./maps'))
     .pipe(dest('./dist/app1/js')));
 }

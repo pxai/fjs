@@ -1,9 +1,25 @@
+import h from "hyperscript";
+import hh from "hyperscript-helpers"
+const { div, p, button } = hh(h);
 
-import view from "./view";
+function view (change, model) {
+    return div({style: `background-color: ${model}`}, [
+            p(`Selected color: ${model}`),
+            div([
+                button({onclick: () => change("red")}, 'Set Red'),
+                button({onclick: () => change("green")}, 'Set Green'),
+                button({onclick: () => change("blue")}, 'Set Blue')
+            ])
+        ]
+    );
+}
 
-const rootNode = document.getElementById("app");
-console.log(rootNode,"Ea")
+function update (value, model) {
+    if (["red","green","blue"].includes(value)) {
+        return value;
+    }
 
-rootNode.appendChild(view({content: "Hello World"}));
+    return model;
+}
 
-console.log("Ok it works");
+export { view, update };
