@@ -1,5 +1,5 @@
-import h from "hyperscript";
-import hh from "hyperscript-helpers"
+import hh from "hyperscript-helpers";
+import { h }from "virtual-dom";
 const { div, p, button } = hh(h);
 
 function view (change, model) {
