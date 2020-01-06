@@ -9,6 +9,7 @@ const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
+const projects = [ 'app1', 'app2' ];
 
 function html() {
   return src('src/**/index.html')
@@ -21,15 +22,21 @@ function css() {
     .pipe(dest('dist'))
 }
 
-function js() {
-  return (browserify({entries: ['./src/app1/js/init.js']})
+async function allJs () {
+  return await projects.forEach( project => js(project));
+}
+
+async function js(project) {
+  // const project = 'app1';
+
+  return (browserify({entries: [`./src/${project}/js/init.js`]})
     .transform("babelify", {presets: ["@babel/preset-env"]})
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init())
     .pipe(sourcemaps.write('./maps'))
-    .pipe(dest('./dist/app1/js')));
+    .pipe(dest(`./dist/${project}/js`)));
 }
 
 function clean() {
@@ -60,17 +67,17 @@ function browserSyncReload(done) {
 }
 
 function watchFiles() {
-  watch("./Gulpfile.js", series(build,browserSyncReload ));
+  watch("./Gulpfile.js", series(build, browserSyncReload ));
   watch("./src/**/index.html", html);
   watch("./src/**/css/*", css);
-  watch("./src/**/js/*", series(js));
+  watch("./src/**/js/*", series(build, browserSyncReload ));
   watch(["./dist/**/*"],series(browserSyncReload));
 }
 
-exports.js = js;
+exports.allJs = allJs;
 exports.css = css;
 exports.html = html;
-const build = series(clean, parallel(html, css, js));
+const build = series(clean, parallel(html, css, allJs));
 
 exports.default = series(build, parallel(watchFiles, browserSync));
 exports.build;
