@@ -1,5 +1,6 @@
 import hh from "hyperscript-helpers";
 import { h }from "virtual-dom";
+import { deleteMsg } from "./update";
 
 const { 
     div, h1, button, pre,
@@ -47,9 +48,9 @@ function taskRow(change) {
     return function (task, index) {
         return tr([
             td(task.name),
-            td(task.done),
+            td(task.done ? "Done":""),
             td([
-                button({onclick: ()=> change(index)} , "Delete")
+                button({onclick: () => change(deleteMsg(index))} , "Delete")
             ])
         ]);
     }
