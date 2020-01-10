@@ -27,16 +27,21 @@ async function allJs () {
 }
 
 async function js(project) {
-  // const project = 'app1';
-
   return (browserify({entries: [`./src/${project}/js/init.js`]})
+    .on('error', showError)
     .transform("babelify", {presets: ["@babel/preset-env"]})
+    .on('error', showError)
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init())
     .pipe(sourcemaps.write('./maps'))
     .pipe(dest(`./dist/${project}/js`)));
+}
+
+function showError(error) {
+  console.log(error);
+  this.emit("end");
 }
 
 function clean() {

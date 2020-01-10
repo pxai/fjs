@@ -1,6 +1,6 @@
 import hh from "hyperscript-helpers";
 import { h }from "virtual-dom";
-import { deleteMsg } from "./update";
+import { deleteMsg, inputMsg, addMsg } from "./update";
 
 const { 
     div, h1, button, pre,
@@ -15,7 +15,7 @@ function view (change, model) {
             div([
                 taskTable(change, model)
             ]),
-            div([pre(JSON.stringify(model))])
+            div([pre(JSON.stringify(model, false, 2))])
         ]
     );
 }
@@ -26,11 +26,11 @@ function taskForm(change, model) {
         input({
             type: 'text',
             value: model.task,
-            oninput: e => change(e.target.value)
+            oninput: e => change(inputMsg(e.target.value))
           }),
         button({
             type: 'button',
-            onclick: console.log("clicked")
+            onclick: () => change(addMsg())
         }, "Save")
     ]);
 }
