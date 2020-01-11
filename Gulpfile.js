@@ -9,7 +9,7 @@ const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
-const projects = [ 'app1', 'app2' ];
+const projects = [ 'app1', 'app2', 'app3' ];
 
 function html() {
   return src('src/**/index.html')

@@ -1,6 +1,8 @@
 import { diff, patch } from "virtual-dom";
 import createElement from "virtual-dom/create-element";
-import { view, update } from "./app";
+import initModel from "./model";
+import view from "./view";
+import update from "./update";
 
 
 function init(initModel, update, view, node) {
@@ -19,4 +21,4 @@ function init(initModel, update, view, node) {
 }
 const rootNode = document.getElementById("app");
 
-init("orange", update, view, rootNode);
+init(initModel, update, view, rootNode);
