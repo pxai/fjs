@@ -2,7 +2,7 @@ import hh from "hyperscript-helpers";
 import { h }from "virtual-dom";
 import { deleteMsg, inputMsg, addMsg } from "./update";
 
-const { 
+const {
     div, h1, button, pre,
     form, label, input,
     table, th, tr, td, a

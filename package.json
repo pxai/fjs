@@ -4,7 +4,7 @@
   "description": "Sample fp wiht JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha test/unit/**/*.spec.js"
   },
   "repository": {
     "type": "git",
