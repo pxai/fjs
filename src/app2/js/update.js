@@ -1,36 +1,41 @@
-
+export const MSG = {
+  ADD: "add",
+  DEL: "delete",
+  INPUT: "input"
+};
 
 export function deleteMsg(index) {
     return {
-        type: "delete",
+        type: MSG.DEL,
         index
     }
 }
 
 export function inputMsg(text) {
     return {
-        type: "input",
+        type: MSG.INPUT,
         text
     }
 }
 
 export function addMsg() {
     return {
-        type: "add"
+        type: MSG.ADD
     }
 }
 
 function update(msg, model) {
     console.log("hey", msg, model);
+
     switch (msg.type) {
-        case "delete":
+        case MSG.DEL:
             return {
                 ...model,
                 tasks: model.tasks.filter((task, i) => i !== msg.index)
             };
-        case "input":
+        case MSG.INPUT:
             return { ...model, name: msg.text }
-        case "add":
+        case MSG.ADD:
             const task = { name: model.name, done: false };
             console.log("New task: ", task);
             return {

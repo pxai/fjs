@@ -26,7 +26,7 @@ async function allJs () {
   return await projects.forEach( project => js(project));
 }
 
-async function js(project) {
+function js(project) {
   return (browserify({entries: [`./src/${project}/js/init.js`]})
     .on('error', showError)
     .transform("babelify", {presets: ["@babel/preset-env"]})
@@ -64,7 +64,7 @@ function browserSync(done) {
     });
     done();
   }
-  
+
 
 function browserSyncReload(done) {
   browsersync.reload();
@@ -73,10 +73,9 @@ function browserSyncReload(done) {
 
 function watchFiles() {
   watch("./Gulpfile.js", series(build, browserSyncReload ));
-  watch("./src/**/index.html", html);
-  watch("./src/**/css/*", css);
   watch("./src/**/js/*", series(build, browserSyncReload ));
-  watch(["./dist/**/*"],series(browserSyncReload));
+  watch("./src/**/index.html", series(html, browserSyncReload ));
+  watch("./src/**/css/*", series(css, browserSyncReload ));
 }
 
 exports.allJs = allJs;
