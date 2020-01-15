@@ -10,6 +10,7 @@ const buffer = require("vinyl-buffer");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
 const projects = [ 'app1', 'app2', 'app3' ];
+const mocha = require('gulp-mocha');
 
 function html() {
   return src('src/**/index.html')
@@ -44,16 +45,22 @@ function showError(error) {
   this.emit("end");
 }
 
-function clean() {
+function clean () {
     return del(["dist"]);
 }
 
-function test() {
+function lint () {
   return src('src/app1/js/*.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 }
+
+function test () {
+  return src("./test/**/*.spec.js", {read: false})
+      .pipe(mocha({reporter: 'nyan'}));
+}
+
 
 function browserSync(done) {
     browsersync.init({
@@ -76,6 +83,7 @@ function watchFiles() {
   watch("./src/**/js/*", series(build, browserSyncReload ));
   watch("./src/**/index.html", series(html, browserSyncReload ));
   watch("./src/**/css/*", series(css, browserSyncReload ));
+  watch("./test/**/*.spec.js", test)
 }
 
 exports.allJs = allJs;
@@ -83,5 +91,5 @@ exports.css = css;
 exports.html = html;
 const build = series(clean, parallel(html, css, allJs));
 
-exports.default = series(build, parallel(watchFiles, browserSync));
+exports.default = series(test, build, parallel(watchFiles, browserSync));
 exports.build;

@@ -1,35 +1,36 @@
 import expect from "expect";
-import view from "../../../src/app2/js/view";
+import { update, deleteMsg, addMsg, inputMsg, MSG} from "../../../src/app2/js/update";
 import defaultModel from "../../../src/app2/js/model";
-import createElement from "virtual-dom/create-element";
 
-describe("App2 views", () => {
+describe("App2 update", () => {
     let change;
     let model;
     let html;
 
-    describe("With default model", () => {
-        beforeEach(() => {
-            model = defaultModel;
-            change = () => {};
-            html = createElement(view(change, model));
-        });
-    
-        it("has a div wrapper", () => {
-            expect(html.nodeName).toBe("DIV");
+    describe("Msg functions", () => {
+        it("deleteMsg", () => {
+          const index = 1;
+            expect(deleteMsg(index)).toStrictEqual({
+                type: MSG.DEL,
+                index
+            });
         });
 
-        it("has a title", () => {
-            const title = html.childNodes[0];
-
-            expect(title.nodeName).toBe("H1");
-            expect(title.childNodes[0].data).toBe("Todo List");
+        it("addMsg", () => {
+            expect(addMsg()).toStrictEqual({
+                type: MSG.ADD
+            });
         });
 
-        it("has a form", () => {
-            const form = html.childNodes[1];
-
-            expect(form.nodeName).toBe("FORM");
+        it("inputMsg", () => {
+          const text = "LOL";
+            expect(inputMsg(text)).toStrictEqual({
+                type: MSG.INPUT,
+                text
+            });
         });
+    });
+
+    describe("Update function", () => {
     });
 });
