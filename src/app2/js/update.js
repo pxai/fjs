@@ -24,7 +24,7 @@ export function addMsg() {
     }
 }
 
-function update(msg, model) {
+export function update(msg, model) {
     console.log("hey", msg, model);
 
     switch (msg.type) {

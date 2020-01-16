@@ -50,7 +50,7 @@ function clean () {
 }
 
 function lint () {
-  return src('src/app1/js/*.js')
+  return src('src/**/*.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
