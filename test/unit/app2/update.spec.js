@@ -35,6 +35,7 @@ describe("App2 update", () => {
         it("delete", () => {
             const index = 1;
             const msg = deleteMsg(index);
+
             const result = update(msg, defaultModel);
             const expected = {
                 tasks: [
@@ -42,6 +43,34 @@ describe("App2 update", () => {
                 ],
                 name: '',
                 done: false
+            };
+
+            expect(result).toStrictEqual(expected);
+        });
+
+        it("add", () => {
+            const index = 1;
+            const msg = addMsg(index);
+            const newTask = { name: "New task", done: false };
+            const model = { ...defaultModel, ...newTask  };
+
+            const result = update(msg, model);
+            const expected = {
+                ...model,
+                tasks: [ ...defaultModel.tasks, newTask ]
+            };
+
+            expect(result).toStrictEqual(expected);
+        });
+
+        it("input", () => {
+            const newInput = "LOL";
+            const msg = inputMsg(newInput);
+
+            const result = update(msg, defaultModel);
+            const expected = {
+                ...defaultModel,
+                name: newInput
             };
 
             expect(result).toStrictEqual(expected);

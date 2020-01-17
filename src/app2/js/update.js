@@ -25,8 +25,6 @@ export function addMsg() {
 }
 
 export function update(msg, model) {
-    console.log("hey", msg, model);
-
     switch (msg.type) {
         case MSG.DEL:
             return {
@@ -37,7 +35,6 @@ export function update(msg, model) {
             return { ...model, name: msg.text }
         case MSG.ADD:
             const task = { name: model.name, done: false };
-            console.log("New task: ", task);
             return {
                 ...model,
                 tasks: [...model.tasks, task]
