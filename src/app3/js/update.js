@@ -1,10 +1,10 @@
-import * as R from 'ramda';
+import * as R from "ramda";
 
 export const MSGS = {
-  LEFT_VALUE_INPUT: 'LEFT_VALUE_INPUT',
-  RIGHT_VALUE_INPUT: 'RIGHT_VALUE_INPUT',
-  LEFT_UNIT_CHANGED: 'LEFT_UNIT_CHANGED',
-  RIGHT_UNIT_CHANGED: 'RIGHT_UNIT_CHANGED',
+  LEFT_VALUE_INPUT: "LEFT_VALUE_INPUT",
+  RIGHT_VALUE_INPUT: "RIGHT_VALUE_INPUT",
+  LEFT_UNIT_CHANGED: "LEFT_UNIT_CHANGED",
+  RIGHT_UNIT_CHANGED: "RIGHT_UNIT_CHANGED",
 };
 
 export function leftValueInputMsg(leftValue) {
@@ -40,14 +40,14 @@ const toInt = R.pipe(parseInt, R.defaultTo(0));
 function update (msg, model) {
   switch (msg.type) {
     case MSGS.LEFT_VALUE_INPUT: {
-      if (msg.leftValue === '')
-        return { ...model, sourceLeft: true, leftValue: '', rightValue: '' };
+      if (msg.leftValue === "")
+        return { ...model, sourceLeft: true, leftValue: "", rightValue: "" };
       const leftValue = toInt(msg.leftValue);
       return convert({ ...model, sourceLeft: true, leftValue });
     }
     case MSGS.RIGHT_VALUE_INPUT: {
-      if (msg.rightValue === '')
-        return { ...model, sourceLeft: false, leftValue: '', rightValue: '' };
+      if (msg.rightValue === "")
+        return { ...model, sourceLeft: false, leftValue: "", rightValue: "" };
       const rightValue = toInt(msg.rightValue);
       return convert({ ...model, sourceLeft: false, rightValue });
     }
@@ -70,14 +70,14 @@ function round(number) {
 
 function convert(model) {
   const { leftValue, leftUnit, rightValue, rightUnit } = model;
-  
-  const [fromUnit, fromTemp, toUnit ] = 
+
+  const [fromUnit, fromTemp, toUnit ] =
     model.sourceLeft
     ? [leftUnit, leftValue, rightUnit]
     : [rightUnit, rightValue, leftUnit];
-    
+
   const otherValue = R.pipe(
-    convertFromToTemp, 
+    convertFromToCurrency,
     round,
   )(fromUnit, toUnit, fromTemp);
 
@@ -86,12 +86,12 @@ function convert(model) {
     : { ...model, leftValue: otherValue };
 }
 
-function convertFromToTemp(fromUnit, toUnit, temp) {
+function convertFromToCurrency(fromUnit, toUnit, temp) {
   const convertFn = R.pathOr(
-    R.identity, 
-    [fromUnit, toUnit], 
+    R.identity,
+    [fromUnit, toUnit],
     UnitConversions);
-    
+
   return convertFn(temp);
 }
 
