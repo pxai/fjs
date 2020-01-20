@@ -3,15 +3,19 @@ const character = {
   race: "Orc"
 };
 
-console.log(character);
 
 const armedCharacter = {
   ...character,
   weapon: "Hammer"
 };
 
-console.log(armedCharacter);
-
+/*
+{
+  name: "Dean Dan",
+  race: "Orc",
+  weapon: "Hammer"
+}
+ */
 
 const weapon = {
   name: "SkullCrusher",
@@ -28,7 +32,21 @@ const complete = {
       attributes
 };
 
-console.log(complete);
+/*
+{
+    attributes: {
+    dex: 10,
+        int: 16,
+        str: 12
+    },
+    name: "Dean Dan",
+        race: "Orc",
+    weapon: {
+      damage: 10,
+      name: "SkullCrusher"
+    }
+}
+*/
 
 const newAttribute = "class";
 const awesome = {
@@ -36,4 +54,19 @@ const awesome = {
   [newAttribute]: "Paladin"
 };
 
-console.log(awesome);
+/*
+{
+  attributes: {
+    dex: 10,
+    int: 16,
+    str: 12
+  },
+  class: "Paladin",
+  name: "Dean Dan",
+  race: "Orc",
+  weapon: {
+    damage: 10,
+    name: "SkullCrusher"
+  }
+}
+ */
