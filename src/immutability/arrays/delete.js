@@ -1,18 +1,16 @@
 const wizards = ["Gandalf", "Rincewind", "Merlin", "Haplo"];
 
-// wizards.splice(-1);
-console.log(wizards);
+// wizards.splice(-1);  ARGH NO!!
 
 const allButLastWizard = wizards.slice(0, -1);
-console.log(allButLastWizard);
+// ["Gandalf", "Rincewind", "Merlin"]
 
-const lastWizard = wizards.slice(-1)[0] //.pop();
-console.log(lastWizard);
+const lastWizard = wizards.slice(-1)[0] //.pop()? ARGH NO!
+// "Haplo"
 
-const [first, ...others] = wizards;
-console.log(first, others);
+const [first, ...others] = wizards;   // shift?  ARG NO!
+// "Gandalf" ["Rincewind", "Merlin", "Haplo"]
 
 const [,second,,fourth] = wizards;
-console.log(second, fourth);
+// [,"Rincewind",,"Haplo"]
 
-// last not possible
