@@ -12,16 +12,34 @@ const character = {
   }
 };
 
-//const { weapon, ...unarmed } = character;
-//console.log(unarmed);
+const { weapon, ...unarmed } = character;
+/*
+unarmed:
+ {
+  attributes: {
+    dex: 10,
+    int: 16,
+    str: 12
+  },
+  name: "Dean Dan",
+  race: "Orc"
+}
+ */
 
-//const { weapon, attributes, ...basic } = character;
+const { weapon, attributes, ...basic } = character;
 
-//console.log(basic);
+/*
+basic:
+{
+  name: "Dean Dan",
+  race: "Orc"
+}
+ */
 
 const {
   attributes : { int: intelligence },
   weapon: { damage }
 } = character;
 
-console.log(intelligence, damage);
+// intelligence: 16
+// damage: 10
