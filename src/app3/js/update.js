@@ -68,7 +68,7 @@ function round(number) {
   return Math.round(number * 10) / 10;
 }
 
-function convert(model) {
+export function convert(model) {
   const { leftValue, leftUnit, rightValue, rightUnit } = model;
 
   const [fromUnit, fromTemp, toUnit ] =
