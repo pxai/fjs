@@ -13,8 +13,32 @@ const character = {
 };
 
 const modified = Object.assign(character, {name: "Me"});
+/*
+{
+  attributes: { ...},
+  name: "Me",
+  race: "Orc",
+  weapon: { ... }
+}
+ */
+const ordinaryBloke = {
+  ...character,
+    race: "white guy",
+    name: "Joe",
+    weapon: { ...character.weapon, name: "Open Palm" }
+};
 
-console.log(modified);
-const ordinaryBloke = {...character, race: "white guy", name: "Joe"};
 
-console.log(ordinaryBloke);
+/*
+ordinaryBloke:
+{
+  attributes: {...},
+  name: "Joe",
+  race: "white guy",
+  weapon: {
+    damage: 10,
+    name: "Open Palm"
+  }
+}
+
+ */
