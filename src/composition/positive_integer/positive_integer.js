@@ -8,8 +8,9 @@ function toInteger(whatever) {
   return +whatever;
 }
 
-// Here, replace R.identity with a composition R.compose(...)
-// of the previous functions to to pass the tests
-const positiveInteger = R.identity; //a => a;
+const positiveInteger = R.compose(
+    toPositive,
+    toInteger
+);
 
 export { positiveInteger };

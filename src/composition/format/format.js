@@ -12,8 +12,10 @@ function removeQuotes(words) {
   return words.replace(/"/g, "");
 }
 
-// Here, replace R.identity with a composition R.compose(...)
-// of the previous functions to to pass the tests
-const format = R.identity; //a => a;
+const format = R.compose(
+    firstToUpper,
+    toLowercase,
+    removeQuotes
+);
 
 export { format };

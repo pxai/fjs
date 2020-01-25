@@ -12,8 +12,10 @@ function addSuffix(msg) {
   return msg + ".";
 }
 
-// Here, replace R.identity with a composition R.compose(...)
-// of the previous functions to to pass the tests
-const logger = R.identity; //a => a;
+const logger = R.compose(
+    addPrefix,
+    addDate,
+    addSuffix
+);
 
 export { logger };

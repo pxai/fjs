@@ -12,8 +12,10 @@ function getParams(query) {
   return query.split("&").map(a => a.split("=")[0]);
 }
 
-// Here, replace R.identity with a composition R.compose(...)
-// of the previous functions to to pass the tests
-const paramsList = R.identity; //a => a;
+const paramsList = R.compose(
+    getParams,
+    getQuery,
+    decode
+);
 
 export { paramsList };
