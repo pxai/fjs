@@ -29,7 +29,7 @@ unarmed:
 const { weapon, attributes, ...basic } = character;
 
 /*
-basic:
+discount:
 {
   name: "Dean Dan",
   race: "Orc"
