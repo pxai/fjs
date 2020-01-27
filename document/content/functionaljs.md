@@ -4,7 +4,7 @@ Just another paper about functional JavaScript
 # Motivation
 *Why should I care*
 
-![Thorin and Orcrist](img/thorin.png)
+![Torin: I hate elves but... this looks good.](img/thorin.png)
 
 Language empires and kingdoms of frameworks rise and fall but only one thing remains: you have to maintain code. That is the part of software development process that takes most of the time and that is precisely why we all should care about creating good, clean, tested and easy-to-maintain code.
 
@@ -905,7 +905,7 @@ Hyperscript
 ## Colour changer
 This application has the following web interface:
 
-![App1](img/app1.png)
+![Behold the almighty colour changer app](img/app1.png)
 
 Awesome, right? Thanks to this cutting-edge piece of technology I’m so loaded that every morning I dive in a pool of cocaine. But let’s focus and explain what it does. It’s simple: if offers you a screen with a default background color (orange). When you click on the buttons you can change that background color.
 
@@ -1022,7 +1022,7 @@ The HTML is pretty simple in this case. We just need an element with an id calle
 ## Yet another Todo list
 Yeah I know, a Todo list. How original. But the previous project made me millonaire so I don’t really care. The truth is that we just need an example of a project that manages a list of data.
 
-![App2](img/app2_1.png)
+![Looks so awful that I'm crying](img/app2_1.png)
 
 But hey, if you are tired by now, we have good news for you: this project follows the same principles as the other. The differences are, obviously, that the state will be more complex and there will be more ways to change it. No worries, we will keep those changes at bay.
 
