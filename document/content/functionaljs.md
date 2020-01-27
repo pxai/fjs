@@ -547,7 +547,7 @@ function sayHello() {
   return "Hello!";
 }
 ```
-Well, the problem with sayHello is that it doesn’t have any parameter and it always return the same. Therefore, we may consider that sayHello is not even a function but a value.
+Well, the problem with sayHello is that it doesn’t have any parameter and it always returns the same. Therefore, we may consider that sayHello is not even a function but a value.
 
 ### random
 A classic code to generate a random number within a given range:
@@ -902,9 +902,13 @@ const div = curriedHTML("div")(false);
 So… immutability, pure functions, composition, and currying. They are useful concepts on their own. But when we combine them together we can build great things. And for functional programming, these are the building blocks that we will use.
 
 # Sample Applications
+Ok, you may be thinking that this FP thingy could some theoretical value not a real use in the real world. With a couple of sample applications, you may see some of the FP principles in action. Both of them are similar, web apps that do some specific task, and both of them try to use pure functions as much as possible and isolate the state changes.
 
-Libraries in use:
-Hyperscript
+The first one is extremely simple and stupid but it's a good starting point to show the basic structure of the app. The second app does more things but the underlying structure is the same.
+
+You can download these apps from this repository where you can also find all code samples and scenarios used in this document: https://github.com/pxai/fjs
+
+To create the views the apps use Hyperscript library with a helper. This makes the HTML generation really simple. Optionally you can apply Tachyons library for styling.
 
 ## Colour changer
 This application has the following web interface:
@@ -1223,3 +1227,5 @@ init(initModel, update, view, rootNode);
 - [Lodash fp module](https://github.com/lodash/lodash/wiki/FP-Guide)
 - [Interesting blog about FO and other stuff](https://blog.ploeh.dk/archive/)
 - [does it mutate site](https://doesitmutate.xyz/)
+- [Hyperscript](https://github.com/hyperhype/hyperscript)
+- [Tachyons](https://tachyons.io/)
