@@ -923,13 +923,13 @@ This application has the following web interface:
 
 ![Behold the almighty colour changer app](img/app1.png)
 
-Awesome, right? Thanks to this cutting-edge piece of technology I’m so loaded that every morning I dive in a pool of cocaine. But let’s focus and explain what it does. It’s simple: if offers you a screen with a default background color (orange). When you click on the buttons you can change that background color.
+Awesome, right? Thanks to this cutting-edge piece of technology I’m so loaded that every morning I dive in a pool of cocaine. But let’s focus and explain what it does. It’s simple: if offers you a screen with a default background colour (orange). When you click on the buttons you can change that background colour.
 
 ¿How can we achieve this in a functional way? As we said before, we will try to use just pure functions, immutable data and isolate model changes.
 
 ### Initial Model
 
-We have to think about the model, a data structure that will contain the whole state of the app. In this case, there is just one piece of data: the current color. Therefore, the model, in this case, will be just a string containing the name of the color, and its initial value will be “orange”.
+We have to think about the model, a data structure that will contain the whole state of the app. In this case, there is just one piece of data: the current colour. Therefore, the model, in this case, will be just a string containing the name of the colour, and its initial value will be “orange”.
 
 ### View
 
@@ -952,13 +952,13 @@ function view (change, model) {
     );
 }
 ```
-Maybe you see those pesky change calls, and you may think this function is not pure at all because is doing something outside. But it’s not the case. If you look carefully, you’ll realize that it doesn’t really call that change function. This function will just return an HTML with some buttons that will fire an event if you click on them.
+Maybe you noticed those pesky change calls, and you may think this function is not pure at all because is doing something outside. But it’s not the case. If you look carefully, you’ll realize that it doesn’t really call that `change` function. This function will just return an HTML with some buttons that will fire an event if you click on them.
 
-The view function doesn’t know what is the purpose of change, but it’s easy to explain: change call will fire an update of the state. That will be managed in the next function.
+The view function doesn’t know what is the purpose of `change`, but it’s easy to explain: `change` call will fire an update of the state. That will be managed in the main function of the end.
 
 ### Update
 
-This update function is a pure function that given a model and a value, it will return a new model.  If the value we pass is included in the allowed colors, that value will be returned. If not, the original model will be 
+This `update` function is a pure function that given a model and a value, it will return a new model.  If the value we pass is included in the allowed colours, that value will be returned. If not, the original model will be 
 returned.
 
 ```JavaScript
@@ -970,15 +970,15 @@ function update (value, model) {
 }
 ```
 
-Don’t let the name update confuse you. If you observe again, the function is pure. It doesn’t change any state from the outside. It just returns values depending on the parameters, and that returned value will be used as a new model.
+Don’t let the name `update` confuse you. If you observe again, the function is pure. It doesn’t change any state from the outside. It just returns values depending on the parameters, and that returned value will be used as a new model.
 
 That model will be used somewhere else to update the state of the app. This project executes that change in a single place, isolating state management from the rest of the app.
 
 ### Init
 
-An here is where we wire up the view and the model. A single function that loads the view with the initial model and the change function, adds it to an HTML document and most importantly: it defines the change function.
+And this is that place: here is where we wire up the view and the model. A single function that loads the view with the initial model and the `update` function, adds it to an HTML document and most importantly: it defines the `change` function.
 
-The change function inside init is responsible for the updates on the state. This change function is the function that is passed to the view to create buttons that will call it. 
+The `change` function inside init is responsible for the updates on the state. This is precisely the function that is passed to the view to create buttons that will call it. 
 
 ```JavaScript
 import { diff, patch } from "virtual-dom";
@@ -999,15 +999,15 @@ function init(initModel, update, view, node) {
     }
 }
 ```
-Whenever the user clicks the button, the change function will do the following:
+Whenever the user clicks the button, the `change` function will do the following:
 
-- It will call the update pure function and generate a new model. Here is were we change the state of the app:
-model = update(value, model);
+- It will call the `update` pure function and generate a new model. Here is were we change the state of the app:
+`model = update(value, model);`
 - That model will be passed to the view function to create a new view.
-- Using the diff function we’ll detect changes in the DOM of the HTML document.
-- Using virtualDOM, we update the HTML document through the patch function.
+- Using the `diff` function we’ll detect changes in the DOM of the HTML document.
+- Using virtualDOM, we update the HTML document through the `patch` function.
 
-Every time that the user interacts with the app, this change function will be called and this process will be repeated. Maybe it sounds familiar? Sure, this is what React does!
+Every time that the user interacts with the app, this `change` function will be called and this process will be repeated. Maybe it sounds familiar? Sure, this is what **React** does!
 
 Next, this is how we start the app: we choose an element of the DOM and we use it to init the app with an initial model (“orange”). We also provide the `update` and the `view` pure functions.
 
@@ -1018,7 +1018,7 @@ init("orange", update, view, rootNode);
 ```
 
 ### HTML
-The HTML is pretty simple in this case. We just need an element with an id called app.
+The HTML is pretty simple in this case. We just need an element with an id called `app`.
 ```html
 <!DOCTYPE html>
 <html>
@@ -1040,13 +1040,13 @@ Yeah I know, a Todo list. How original. But the previous project made me a milli
 
 ![Looks so awful that I'm crying](img/app2_1.png)
 
-But hey, if you are tired by now, we have good news for you: this project follows the same principles as the other. The differences are, obviously, that the state will be more complex and there will be more ways to change it. No worries, we will keep those changes at bay.
+But hey, if you are tired by now, we have good news for you: this project follows the same principles of the other. The differences are, obviously, that the state will be more complex and there will be more ways to change it. No worries, we will keep those changes at bay.
 
 ### Initial Model
 
 The model must be able to contain and reflect the state of the program at any time. Well, in an interpreted language like JavaScript it’s easy to grow any data structure but we should think carefully about how the model should look like.
 
-In this particular case, we need a model that holds an array of tasks. Each task just has a couple of attributes: `name` and `done`. There is something else in the model that may not look so obvious at first sight: name and done attributes. Whaaaat?
+In this particular case, we need a model that holds an array of tasks. Each task just has a couple of attributes: `name` and `done`. There is something else in the model that may not look so obvious at first sight: `name` and `done` attributes. Whaaaat?
 
 Well, this model must be able to reflect the state of the program, isn’t it? So those attributes will contain the data introduced in the forms whenever we want to add new data.
 
@@ -1067,7 +1067,7 @@ In this app, the view will show the value of the model at the bottom. This will 
 ### View
 Here we go again with the view. This will be a piece of cake, but in this case, we will need to split the view into more functions because the user interface takes much more work. The names of the functions should be clear enough to understand.
 
-As we said in the description of this project, there will be more places where we will try to change the state: when we add a message, when we delete one and when we edit the form. We will notify those changes using the change function used before, but in this case, we will append a message that will allow us to pass parameters and most importantly, to specify what kind of operation we want to perform.
+As we said in the description of this project, there will be more places where we will try to change the state: when we add a task, when we delete one and when we edit the form. We will notify those changes using the `change` function used before, but in this case, we will append a message that will allow us to pass parameters and most importantly, to specify what kind of operation we want to perform.
 
 So, again, this view functions will be purely pure and immaculate. But obviously, there will be attributes for certain events that will trigger state changes.
 
@@ -1143,7 +1143,7 @@ export const MSG = {
   INPUT: "input"
 };
 ```
-Then, for each message type, we create a function that receives a parameter and creates a message. This function will be called by the view and a message will be returned from it. Each message contains a type (used in update function to decide what to do) and in some cases some extra info that can be used in the update process.
+Then, for each message type, we create a function that receives a parameter and creates a message. This function will be called by the view and a message will be returned from it. Each message contains a type (used in `update` function to decide what to do) and in some cases some extra info that can be used in the update process.
 
 ```JavaScript
 export function deleteMsg(index) {
@@ -1164,7 +1164,7 @@ export function addMsg() {
     }
 }
 ```
-And finally, the update function. We need to do it bigger than the previous project because it must take care of each message type. It also receives the model with the current state.
+And finally, the `update` function. We need to do it bigger than the previous project because it must take care of each message type. It also receives the model with the current state.
 
 Inside the update, depending on the message type we create a new model based in the original. That model will be used somewhere else where the state is changed in an isolated place:
 
@@ -1192,7 +1192,7 @@ export default update;
 ```
 Even if it shows that ugly switch/case structure, the `update` function is still perfectly pure and easy to test. There are alternate ways to write that and avoid the switch/case don’t worry. We could also extract the code from each case too. The point here is that `update` returns a new model for each message or it just returns the model as it was.
 
-Does this update sound familiar? This is, in essence, what **Redux** does. Redux can be used in React applications to isolate state management from components. With Redux, a React component (that looks slightly like our views here), binds state values with a centralized store and events are dispatched like messages to the update function. In short, it separates the state from the components.
+Does this `update` sound familiar? This is, in essence, what **Redux** does. Redux can be used in React applications to isolate state management from components. With Redux, a React component (that looks slightly like our views here), binds state values with a centralized **store** and events are dispatched like messages to the update function. In short, it separates the state from the components.
 
 When the state structure gets too complex, there are tools to normalize the state: these tools transform a nested state into flat objects, making the state easier to manage.
 
@@ -1201,6 +1201,7 @@ Who will change the state?
 ### App
 
 Surprise it’s me, the app! And what? Yes, it’s exactly the same code from the simple project. State changes continue isolated here in this simple file. In the meantime, we see that we were able to create a much more complex app with
+the same piece of code to take care of the state changes. Brilliant.
 
 ```JavaScript
 import { diff, patch } from "virtual-dom";
@@ -1228,9 +1229,16 @@ init(initModel, update, view, rootNode);
 ```
 
 # References
+There are tons of resources, I'll name just a few. The first book is supposed to be a masterpiece of programming in general. The second is easier and focused on JavaScript.
+
+## Some books
+- Structure and Interpretation of Computer Programs, Gerald Jay Sussman & Hal Abelson
+- Functional light JavaScript, Kyle Simpson
+- Functional Programming in JavaScript, Luis Atencio
 
 ## Links
-
+- [Functional JavaScript at Medium](https://medium.com/javascript-scene/tagged/functional-programming)
+- [Functional at freecodecamp](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/)
 - [Ramda library](https://ramdajs.com/)
 - [Lodash fp module](https://github.com/lodash/lodash/wiki/FP-Guide)
 - [Interesting blog about FO and other stuff](https://blog.ploeh.dk/archive/)
