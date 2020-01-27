@@ -1,4 +1,7 @@
 # Functional Programming with JavaScript, gentle intro
+
+[![Build Status](https://travis-ci.org/pxai/fjs.svg?branch=master)](https://travis-ci.org/pxai/fjs)
+
  This project contains sample code, scenarios and source code for the document.
 
  - Immutability playground sourcode
