@@ -1,14 +1,11 @@
-﻿
-Just another paper about functional JavaScript
-
-# Motivation
+﻿# Motivation
 *Why should I care*
 
-![Torin: I hate elves but... this looks good.](img/thorin.png)
+![Thorin: I hate those pointy-eared bastards... but this looks good.](img/thorin.png)
 
 Language empires and kingdoms of frameworks rise and fall but only one thing remains: you have to maintain code. That is the part of software development process that takes most of the time and that is precisely why we all should care about creating good, clean, tested and easy-to-maintain code.
 
-This is one of those great topics like (A.I., Internet, Sofware Engineering,..) that come and go, and Functional Programming is all the rage lately. But despite all the hype, any crafter should take this one because this provides tools that you may consider for your weaponry. Even if you don’t embrace it completely. After all, when Thorin Oakenshield (a proud dwarf king) got an elven sword he didn’t refuse to use it.
+Functional Programming is one of those great topics like A.I., Internet, Sofware Engineering,... that come and go, and it is all the rage lately. But despite all the hype, any crafter should take this one because this provides tools that you may consider for your weaponry. Even if you don’t embrace it completely. After all, when Thorin Oakenshield (a proud dwarf king) got an elven sword he didn’t refuse to use it.
 
 Take a look into some FP concepts and you’ll find valuable knowledge. And these are not like the latest-cool-frameworks or the new config format: these are coding technics that may help you on your daily work to write better code. These are topics that endure over time and that’s why it is worth dipping you toes on its waters.
 
@@ -31,7 +28,7 @@ factorial(0) = 1
 factorial(n+1) = (n+1) * factorial(n)
 ```
 
-It doesn’t say how to do the thing but what it does. That’s the difference: FP says what, declarative explains how.
+It doesn’t say how to do the thing but what it does. That’s the difference: FP just **says what**, whereas declarative **explains how**.
 
 Declarative style is growing in many languages and beyond simple and nice looks, it has great benefits. Here you have these well-known pieces of code:
 
@@ -51,7 +48,7 @@ FP also set constraints. Nobody likes the word constraint, but as you’ll see, 
 # Immutability
 Programs are about manipulating data, generally getting some data and transforming into something else. During that process, it’s necessary to keep the original data intact to get the desired results. Immutability is a constraint we should use to wear our applications.
 
-The rule of thumb is simple, make a copy of the original data when you put your dirty fingers on it. Otherwise, bugs may show up with race conditions and unexpected behaviors of your program.
+The rule of thumb is simple, make a copy of the original data when you put your dirty fingers on it. Otherwise, bugs may show up with race conditions and unexpected behaviours of your program.
 
 In JavaScript, the most common data structures are arrays and objects, and combinations of both. Let’s remind ourselves how to deal with these structures to add, extract, delete, update data from them. 
 
@@ -71,8 +68,9 @@ const moarWizards = [...wizards, "Raistlin"];
 
 const evenMoarWizards = ["Radagast", ...moarWizards];
 // ["Radagast", "Gandalf", "Rincewind", "Merlin", "Raistlin"]
-
+```
 We could also create a new array combining other arrays, elements and even empty elements:
+```JavaScript
 const others = [ "Haplo", "Alfred" ];
 const assemble = [ ,,,"MyAss", ...wizards,, ...others ];
 // [undefined, undefined, undefined, "MyAss", "Gandalf", "Rincewind", "Merlin", undefined, "Haplo", "Alfred"]
@@ -97,7 +95,7 @@ We could also make use of filter function to extract a new array from another.
 
 ### Updating elements
 If we just one to update certain elements of the array we can create a new one using `Object.assign`.
-Obviously, a direct update on the array is mutable as well as functions like `fill` or `copyWithin`.
+Obviously, a direct update on the array is mutable as well as functions like `fill` or `copyWithin` so **do not** use them.
 
 ```JavaScript
 const wizards = ["Gandalf", "Rincewind", "Merlin", "Radagast"];
@@ -109,7 +107,7 @@ const changed = Object.assign([], wizards, {[2]: "Raistlin"});
 ## Objects
 As we said, when JavaScripts deals with lists of data it uses arrays. And most of the time those arrays contain objects. Both arrays and objects can be nested in many ways.
 
-Do you also need to manipulate objects in a simple and immutable way? Spread operator and destructuring come to the rescue. Well, to be honest, they don’t guarantee immutability as we’ll see in the cloning section. But spread and destructuring will work well enough for flat simple objects.
+Do you also need to manipulate objects in a simple and immutable way? Spread operator and destructuring come to the rescue. Well, to be honest, they don’t guarantee immutability as we’ll see in the cloning section. But spread and destructuring will work well enough for simple flat objects.
 
 ### Adding elements
 Let’s start with a fictional character with a couple of attributes, Spread operator allows us to add new attributes:
@@ -288,7 +286,7 @@ ordinaryBloke:
 ```
 
 ## Cloning stuff
-Ok, now is when all things that we previously saw fall apart like a castle of cards. Well, it depends on how complex is the data structure:  if we are dealing with objects that contain other nested objects we probably could be mutating data.
+Ok, now is when all things that we previously saw fall apart like a castle of cards. Well, it depends on how complex is the data structure: if we are dealing with objects that contain other nested objects and we don't clone them correctly, we probably could be mutating data. Be careful!
 
 ### Cloning objects
 Just to raise awareness, consider the next character object:
@@ -347,7 +345,7 @@ player2:
  */
 ```
 
-Ouch! the name attribute can be changed safely in each one, but when it comes to the nested weapon object if we change one of the copies we are changing all of them! This is because we are not really cloning, but making a shallow copy: it copies the first level of the object, for nested parts it copies a reference. That’s why we sometimes need to do deep cloning.
+Ouch! the name attribute can be changed safely in each one, but when it comes to the nested weapon object if we change one of the copies we are changing all of them! This is because we are not really cloning, but making a **shallow copy**: it copies the first level of the object, for nested parts it copies a reference. That’s why we sometimes need to do deep cloning.
 This well-known composition of stringify and parse will do the trick:
 
 ```JavaScript
@@ -459,7 +457,7 @@ Oh my god, it changes the original array.
 
 So, to sum it up, be careful if you “clone” and change an array, you may have a fake clone and problems could arise.
 
-And of course, beware of these JavaScript mutating functions: 
+And of course, beware of these mutating JavaScript functions: 
 
 - pop
 - push
@@ -489,10 +487,10 @@ We should try to make all our functions pure because:
 - Lead to cleaner code.
  
 **Easy to test**
-Those could lead to bugs and make code more difficult to test and maintain.
-Why? Because to test something you probably need to define several mocks or prepare a lot of stuff.
+Just an input and its output: you don't have to care about anything else.
+Side effects make code more difficult to test and maintain. Why? Because to test something you probably need to define several mocks or prepare a lot of stuff.
 
-**No side-effects**
+**No side effects**
 This is the key: a pure function can’t change or alter anything out of its boundaries. It can’t depend on anything from the outside. That means that:
 
 - It can’t alter parameters, because it may alter the outside code execution.
@@ -547,7 +545,7 @@ function sayHello() {
   return "Hello!";
 }
 ```
-Well, the problem with sayHello is that it doesn’t have any parameter and it always returns the same. Therefore, we may consider that sayHello is not even a function but a value.
+Well, the problem with `sayHello` is that it doesn’t have any parameter and it always returns the same. Therefore, we may consider that `sayHello` is not even a function but a value.
 
 ### random
 A classic code to generate a random number within a given range:
@@ -585,7 +583,7 @@ function dataLength(filename) {
   return data.length;
 }
 ```
-Burn the heretic! IO depends on the outside and any function that deals with it will have the taint of chaos. Impure. 
+Burn the heretic! IO depends on the outside and any function that deals with it will have the *taint of chaos*. Impure. 
 There are ways to create functors to deal with IO in a pure way though. But not like that. 
 
 ### trigonometry
@@ -614,7 +612,7 @@ function dayInterval(date) {
   return today - date;
 }
 ```
-`Date()` call will always be problematic. `new Date()` will return the current date and that will depend on the outside. The machine clock may not be set correctly. So it leads to unexpected behavior. We could improve it adding today as a parameter.
+`Date()` call will always be problematic. `new Date()` will return the current date and that will depend on the outside. The machine clock may not be set correctly. So it leads to unexpected behaviour. We could improve it adding today as a parameter.
 
 # Function composition
 Composition is a combination of two or more functions to create a new function.
@@ -655,7 +653,7 @@ function toInteger(whatever) {
 }
 ```
 How do we create a function that given a string returns a positive integer? 
-Easy, combining previous functions. Please note that composition works from right to left, so first, it will call toInteger and then it will call `toPositive`.
+Easy, combining previous functions. Please note that composition works from right to left, so first, it will call `toInteger` and then it will call `toPositive`.
 ```JavaScript
 const positiveInteger = R.compose(
     toPositive,
@@ -763,7 +761,8 @@ An alternate way to achieve composition is to use `pipe` instead of `compose`. I
 const paramsList = R.pipe(decode, getQuery, getParams);
 ```
 It may look easier to understand for some, after all, according to Cheto’s dilemma of Clean Code, cleanliness may be an arbitrary quality of the code.
-So:
+
+But keep in mind:
 write your functions in a way that they can be combined. This is the way.
 
 # Currying
@@ -812,9 +811,30 @@ And now we can call it:
 increment(87); // 88
 ```
 
+## Example: words
+Another nice and easy example of how currying creates new functions. We have a general function that splits a string with another string. 
+
+```JavaScript
+import R from "ramda";
+
+function split(separator, message) {
+  return message.split(separator);
+}
+```
+We want a function called `words` that returns an array of words from a phrase. How could we do it? Easy-peasy with a curried version of `split`:
+Solution:
+```JavaScript
+const curriedSplit = R.curry(split);
+const words = curriedSplit(" ");
+```
+And this is how we could use it:
+```JavaScript
+words("Don't come easy"); // ["Don't", "come", "easy"]
+```
+
 ## Example: discount10Percent
 
-This is similar to the first example. We have a function that calculates a discount on a prize, given the percentage.
+This is similar to the first example. We have a function that given the percentage, calculates a discount on a prize.
 ```JavaScript
 import R from "ramda";
 
@@ -822,34 +842,19 @@ function discount(percent, prize) {
   return prize * (percent / 100);
 }
 ```
-How could we create a function that simply calculates a discount of 10% for any given prize. Currying the discount function:
+How could we create a function that simply calculates a discount of 10% for any given prize. Currying the `discount` function:
 ```JavaScript
 const curriedDiscount = R.curry(discount);
 const discount10Percent = curriedDiscount(10);
 ```
-Now we can call directly:
+Now we can call it directly:
 ```JavaScript
 discount10Percent(20); // 2
-Example: words
-Another simple sample. We have a function that splits a string with a given separator.
-import R from "ramda";
+```
 
-function split(separator, message) {
-  return message.split(separator);
-}
-```
-How could we create a function that splits a phrase into an array of words? Easy-peasy with a curried version of split:
-```JavaScript
-const curriedSplit = R.curry(split);
-const words = curriedSplit(" ");
-```
-Now we have our nice function:
-```JavaScript
-words("Hello how are you"); // ["Hello", "how", "are", "you"]
-```
 ## Example: html elements
 
-Imagine that we are tired of generating HTML with string, so we decide to write a function to do it for us. Given an element/tag and a content, it returns a HTML node.
+Imagine that we are tired of generating HTML with strings, so we decide to write a function to do it for us. Given an element/tag and a content, it returns a HTML node.
 ```JavaScript
 import R from "ramda";
 
@@ -863,15 +868,16 @@ html("div", "Div content");
 html("p", "this is a paragraph");
 html("div", html("span", "Hello"));
 ```
-But calling HTML all the time with two parameters looks a bit confusing. It would be nice to have a function for each tag type. Our code would looks easier to read.
-If we create a curried version of html funtion,
+But calling `html` all the time with two parameters looks a bit confusing. It would be nice to have a function for each tag type. Our code would looks easier to read.
+
+If we create a curried version of the `html` funtion,
 ```JavaScript
 const curriedHTML = R.curry(html);
 const p = curriedHTML("p");
 const div = curriedHTML("div");
 const span = curriedHTML("span");
 ```
-Now code looks better:
+Now the code looks much better with meaningfull functions:
 ```JavaScript
 div("Div content");
 p("this is a paragraph");
@@ -899,10 +905,12 @@ function curriedHTML(tag) {
 const div = curriedHTML("div")(false);
 ```
 
-So… immutability, pure functions, composition, and currying. They are useful concepts on their own. But when we combine them together we can build great things. And for functional programming, these are the building blocks that we will use.
+So… 
+
+immutability, pure functions, composition, and currying. They are useful concepts on their own. But when we combine them together we can build great things. And for functional programming, these are the building blocks that we will use.
 
 # Sample Applications
-Ok, you may be thinking that this FP thingy could some theoretical value not a real use in the real world. With a couple of sample applications, you may see some of the FP principles in action. Both of them are similar, web apps that do some specific task, and both of them try to use pure functions as much as possible and isolate the state changes.
+Ok, you may be thinking that this FP thingy could have some theoretical value but not a **real** use in the **real** world. With a couple of sample applications, you may see some of the FP principles in action. Both of them are similar, web apps that do some specific task, and both of them try to use pure functions as much as possible and isolate state changes.
 
 The first one is extremely simple and stupid but it's a good starting point to show the basic structure of the app. The second app does more things but the underlying structure is the same.
 
