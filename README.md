@@ -47,3 +47,12 @@
  
 ## Currying exercises
  - [Currying exercises](https://codesandbox.io/s/fpjscurrying-97hte)
+
+
+### The sacred lambdastika symbol
+FP should be just a means to an end, not the end of the rest of techniques.
+Consider this logo as a reminder to avoid supporting anything too enthusiastically:
+
+![Labmdastika](document/content/img/lambdastika_sm.png)
+
+[SVG version of the lambdastika](document/content/img/lambdastika.svg)

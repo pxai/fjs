@@ -8,23 +8,23 @@ Just another paper about functional JavaScript
 
 Language empires and kingdoms of frameworks rise and fall but only one thing remains: you have to maintain code. That is the part of software development process that takes most of the time and that is precisely why we all should care about creating good, clean, tested and easy-to-maintain code.
 
-This is one of those great topics like (A.I., Internet, Sofware Engineering,..) that come and go, and Functional Programming is all the rage lately. But despite all the hype any crafter should take this one because this provides tools that you may consider for you weaponry. Even if you don’t embrace it completely. Afterall, when Thorin Oakenshield (a proud dwarf king) got an elven sword he didn’t refuse to use it.
+This is one of those great topics like (A.I., Internet, Sofware Engineering,..) that come and go, and Functional Programming is all the rage lately. But despite all the hype, any crafter should take this one because this provides tools that you may consider for your weaponry. Even if you don’t embrace it completely. After all, when Thorin Oakenshield (a proud dwarf king) got an elven sword he didn’t refuse to use it.
 
-Take a look into some FP concepts and you’ll find valuable knowledge. And these are not like the latest-cool-frameworks or the new config format: these are coding technics that may help you on your daily work to write better code. These are topics that endure over time and that’s why is worth to dip you toes on its waters.
+Take a look into some FP concepts and you’ll find valuable knowledge. And these are not like the latest-cool-frameworks or the new config format: these are coding technics that may help you on your daily work to write better code. These are topics that endure over time and that’s why it is worth dipping you toes on its waters.
 
 No monads or functors, no abstract math, just simple code. This paper will try to introduce the basic building blocks of FP.
 
 # So what is…?
 ## A program
-As a developer you should be good at abstractions, so consider this the ultimate abstraction: ¿what is a program? Or ¿What is a program made of? Essentialy is just code and data. Code uses data to generate a result. 
+As a developer, you should be good at abstractions, so consider this the ultimate abstraction: ¿what is a program? Or ¿What is a program made of? Essentially is just code and data. Code uses data to generate a result. 
 It would be great if it was so easy but it’s not: a program has to deal with state changes. And that is the place where most of the bugs feast on our mistakes.
 
-If that is not enough we also have side-effects everywhere: user interaction, loggin, IO, etc. are a necessary evil.
+If that is not enough we also have side-effects everywhere: user interaction, logging, IO, etc. are a necessary evil.
 
 How does FP help here? Let’s give a formal definition.
 
 ## Functional Programming
-...it’s a programming paradigm that treat computation as math functions” blah blah. Ok, anybody can google that. In a more down-to-earth definition, functional programming is a declarative way to write code, rather than imperative. Consider the classic example of the function that calculates factorial of a number:
+"...it’s a programming paradigm that treats computation as math functions” blah blah. Ok, anybody can google that. In a more down-to-earth definition, functional programming is a declarative way to write code, rather than imperative. Consider the classic example of the function that calculates the factorial of a number:
 
 ```JavaScript
 factorial(0) = 1
@@ -33,7 +33,7 @@ factorial(n+1) = (n+1) * factorial(n)
 
 It doesn’t say how to do the thing but what it does. That’s the difference: FP says what, declarative explains how.
 
-Declarative style is growing in many languages and beyond the simple and nice looks, it has great benefits. Here you have these well-known pieces of code:
+Declarative style is growing in many languages and beyond simple and nice looks, it has great benefits. Here you have these well-known pieces of code:
 
 ```JavaScript
 for (let i = 0; i< arr.length; i++) {
@@ -44,19 +44,19 @@ And the declarative equivalent:
 ```JavaScript
 arr.forEach(elem => console.log(elem));
 ```
-In the classic for structure we need to set 3 expressions to run the loop. The problem is not only that it’s rather verbose: there are, at least, 7 places where we could make a mistake in a classic for loop. On the other hand, a direct forEach on the array leaves less room for errors and looks cleaner.
+In the classic for structure, we need to set 3 expressions to run the loop. The problem is not only that it’s rather verbose: there are, at least, 7 places where we could make a mistake in a classic for loop. On the other hand, a direct forEach on the array leaves less room for errors and looks cleaner.
 
 FP also set constraints. Nobody likes the word constraint, but as you’ll see, it’s for your own good. We’ll discover those constraints in the next topics: immutability and pure functions.
 
 # Immutability
-Programs are about manipulating data, generally getting some data and transforming into something else. During that process it’s necessary to keep the original data intact in order to get the desired results. Immutability is a constraint we should use to wear our applications.
+Programs are about manipulating data, generally getting some data and transforming into something else. During that process, it’s necessary to keep the original data intact to get the desired results. Immutability is a constraint we should use to wear our applications.
 
-The rule of thumb is simple, make a copy of the original data when you put your dirty fingers on it. Otherwise bugs may show up with race conditions and unexpected behaviours of your program.
+The rule of thumb is simple, make a copy of the original data when you put your dirty fingers on it. Otherwise, bugs may show up with race conditions and unexpected behaviors of your program.
 
-In JavaScript the most common data structures are arrays and objects, and combinations of both. Let’s remind ourselves how to deal with this structures to add, extract, delete, update data from them. 
+In JavaScript, the most common data structures are arrays and objects, and combinations of both. Let’s remind ourselves how to deal with these structures to add, extract, delete, update data from them. 
 
 ## Arrays
-As well as LISP is about processing lists, we could say that JavaScript code is (quite often) about processing arrays. Thanks to new spread … operator and deconstruction, now we are able to manipulate arrays in a very elegant way.
+As well as LISP is about processing lists, we could say that JavaScript code is (quite often) about processing arrays. Thanks to the new spread `…` operator and deconstruction, now we are able to manipulate arrays in a very elegant way.
 
 ### Adding elements
 We start with an array of wizards. We could add an element with push function, but this one mutates the original array. So we can just create a new array using the spread operator:
@@ -79,7 +79,7 @@ const assemble = [ ,,,"MyAss", ...wizards,, ...others ];
 ```
 
 ### Deleting/Extracting elements
-How could we delete or extract values from an array. We shouldn’t delete values from the original array. But functions like slice and deconstruction can help to get certain parts of an array.
+How could we delete or extract values from an array? We shouldn’t delete values from the original array. But functions like slice and deconstruction can help to get certain parts of an array.
 
 ```JavaScript
 const wizards = ["Gandalf", "Rincewind", "Merlin", "Haplo"];
@@ -96,8 +96,8 @@ const [,second,,fourth] = wizards;
 We could also make use of filter function to extract a new array from another.
 
 ### Updating elements
-If we just one to update certain elements of the array we can create a new one using Object.assign.
-Obviously a direct update on the array is mutable as well as functions like fill or copyWithin.
+If we just one to update certain elements of the array we can create a new one using `Object.assign`.
+Obviously, a direct update on the array is mutable as well as functions like `fill` or `copyWithin`.
 
 ```JavaScript
 const wizards = ["Gandalf", "Rincewind", "Merlin", "Radagast"];
@@ -108,7 +108,9 @@ const changed = Object.assign([], wizards, {[2]: "Raistlin"});
 
 ## Objects
 As we said, when JavaScripts deals with lists of data it uses arrays. And most of the time those arrays contain objects. Both arrays and objects can be nested in many ways.
-¿Do you also need to manipulate objects in a simple and immutable way? Spread operator and destructuring come to the rescue. Well, to be honest, they don’t guarantee immutability as we’ll see in the cloning section. But spread and destructuring will work well enough for flat simple objects.
+
+Do you also need to manipulate objects in a simple and immutable way? Spread operator and destructuring come to the rescue. Well, to be honest, they don’t guarantee immutability as we’ll see in the cloning section. But spread and destructuring will work well enough for flat simple objects.
+
 ### Adding elements
 Let’s start with a fictional character with a couple of attributes, Spread operator allows us to add new attributes:
 ```JavaScript
@@ -345,7 +347,7 @@ player2:
  */
 ```
 
-Ouch! the name attribute can be changed safely in each one, but when it comes to the nested weapon object, if we change one of the copies we are changing all of them! This is because we are not really cloning, but making a shallow copy: it copies the first level of the object, for nested parts it copies a reference. That’s why we sometimes need to do a deep cloning.
+Ouch! the name attribute can be changed safely in each one, but when it comes to the nested weapon object if we change one of the copies we are changing all of them! This is because we are not really cloning, but making a shallow copy: it copies the first level of the object, for nested parts it copies a reference. That’s why we sometimes need to do deep cloning.
 This well-known composition of stringify and parse will do the trick:
 
 ```JavaScript
@@ -430,7 +432,7 @@ If we check the original heroes array:
 
 ```JavaScript
 /*
-heroes change too, because is a shallow clone!!!:
+heroes change too because is a shallow clone!!!:
 [ {
     ...
   weapon: {
@@ -487,7 +489,7 @@ We should try to make all our functions pure because:
 - Lead to cleaner code.
  
 **Easy to test**
-Those could lead to bugs and make code more difficult to test and mantain.
+Those could lead to bugs and make code more difficult to test and maintain.
 Why? Because to test something you probably need to define several mocks or prepare a lot of stuff.
 
 **No side-effects**
@@ -503,18 +505,18 @@ This is the key: a pure function can’t change or alter anything out of its bou
 As we will see later, pure functions enable composition, especially when functions have a single parameter.
 
 **Cacheable/Memoizable**
-When a function is pure it gives you the guarantee that it will always return the same thing for a given parameter. So, if we run the function once, we can save or store in a cache the result in case we call it again with the same parameter. There is no need to run it again, we know what the result will be. That’s also known as referential transparency, because we could change the function call with a value.
+When a function is pure it gives you the guarantee that it will always return the same thing for a given parameter. So, if we run the function once, we can save or store in a cache the result in case we call it again with the same parameter. There is no need to run it again, we know what the result will be. That’s also known as referential transparency because we could change the function call with a value.
 
 **Parallelizable**
-If functions don’t have any side effect, we can run them at the same time, right? So we get another good optimization.
+If functions don’t have any side effects, we can run them at the same time, right? So we get another good optimization.
 
-So purify your functions and try to write them in a pure way. These will become the basic units to use with FP in mind.
+So, purify your functions and try to write them in a pure way. These will become the basic units to use with FP in mind.
 
 ## ¿Pure or impure?
 Let’s show some scenarios with some familiar code, and try to identify what is pure and what it’s not.
 
 ### Hello
-An innocent function that shows a message on console.
+An innocent function that shows a message on the console.
 ```JavaScript
 function hello() {
   console.log("Hello log");
@@ -523,7 +525,7 @@ function hello() {
 It’s impure. It’s affecting the outside world, even if it’s just a CLI.
 
 ### multiply
-Here you have a couple of functions that multiply values and retur the result:
+Here you have a couple of functions that multiply values and return the result:
 ```JavaScript
 function multiply(a, b) {
   return a * b;
@@ -538,7 +540,7 @@ function multiplyMe(a) {
 The first is perfectly pure. The second is altering a variable from the outside. Even if it’s a simple variable, the function multiplyMe is causing a side-effect and thus, it’s impure.
 
 ### say_hello
-Another inocent function. This one just returns “Hello”, without using console.log. That may be clean enough.
+Another innocent function. This one just returns “Hello”, without using console.log. That may be clean enough.
 
 ```JavaScript
 function sayHello() {
@@ -554,7 +556,7 @@ function random(min, max) {
   return Math.round(Math.random() * (max - min)) + min;
 }
 ```
-Obviously it’s impure. For the same parameters it will return different results. This one is impure, but there are  pure implementations of random number generators out there if you want to check.
+Obviously, it’s impure. For the same parameters, it will return different results. This one is impure, but there are pure implementations of random number generators out there if you want to check.
 
 ### happy_birthday
 This function receives an object and returns a copy of it.
@@ -586,14 +588,14 @@ function dataLength(filename) {
 Burn the heretic! IO depends on the outside and any function that deals with it will have the taint of chaos. Impure. 
 There are ways to create functors to deal with IO in a pure way though. But not like that. 
 
-### trigononemetry
+### trigonometry
 Hey, this is just Math stuff, this should be ok.
 ```JavaScript
 function sinusoidal(a) {
   return Math.sin(a) * 5;
 }
 ```
-Nope. When we deal with these kind of numbers with a lot of decimals, the result may be different depending on where this code runs. It’s impure.
+Nope. When we deal with these kinds of numbers with a lot of decimals, the result may be different depending on where this code runs. It’s impure.
 
 ### promises
 This stupid pseudocode shows just a promise. Maybe it’s not the best example.
@@ -602,7 +604,7 @@ function doAsyncStuff(a, b) {
   return new Promise(a + b);
 }
 ```
-Well, apparently it will always return the same for a and b. The problem with promises in general and in the JavaScript world is that they may depend on the event loop. And who knows what is the state of it. It depends on the outside? Bad thing.
+Well, apparently it will always return the same for a and b. The problem with promises in general and in the JavaScript world is that they may depend on the event loop. And who knows what is the state of it. Does it depend on the outside? Bad thing.
 
 ### date_diff
 Sometimes we need to deal with dates… so?
@@ -612,15 +614,15 @@ function dayInterval(date) {
   return today - date;
 }
 ```
-Date will always be problematic. new Date() will return current date and that will depend on the outside. The machine clock may not be set correctly. So it leads to unexpected behaviour. We could improve it adding today as a parameter.
+`Date()` call will always be problematic. `new Date()` will return the current date and that will depend on the outside. The machine clock may not be set correctly. So it leads to unexpected behavior. We could improve it adding today as a parameter.
 
 # Function composition
-Composition is the combination of two or more function to create a new function.
+Composition is a combination of two or more functions to create a new function.
 In a nutshell, it’s a function that takes another function as an argument and/or returns a function. The next figure shows how composition looks like from a mathematical perspective.
 
 ![Function composition](img/composition.png)
 
-You’ve probably done this somewhere in a casual way, but for Functional Programmers THIS is the way. 
+You’ve probably done this somewhere in a casual way, but for Functional Programmers, THIS is the way. 
 A simple example to create a function that calculates a prize and also rounds the result we could do something like:
 
 ```JavaScript
@@ -637,10 +639,10 @@ And now we can use it that function directly:
 total(prize);  //= Math.round(calculate(prize));
 ```
 
-Let’s explore some scenarios where we create a function composing other functions. Composition can be done by hand but we’ll use the Ramda library to build compositions easier. It’s better if you can try this scenarios as an exercise in https://codesandbox.io/s/fpjscomposition-d99rx
+Let’s explore some scenarios where we create a function composing other functions. Composition can be done by hand but we’ll use the Ramda library to build compositions easier. It’s better if you can try these scenarios as an exercise in https://codesandbox.io/s/fpjscomposition-d99rx
 
 ## Example: positive integer
-We have a couple of simple functions: one of them returns the absolute value of a number, and the other converts a string to integer. For simplicity shake, there is no type check or whatsoever.
+We have a couple of simple functions: one of them returns the absolute value of a number, and the other converts a string to an integer. For simplicity shake, there is no type check or whatsoever.
 ```JavaScript
 import R from "ramda";
 
@@ -653,7 +655,7 @@ function toInteger(whatever) {
 }
 ```
 How do we create a function that given a string returns a positive integer? 
-Easy, combining previous functions. Please note that composition works from right to left, so first it will call toInteger and then it will call toPositive.
+Easy, combining previous functions. Please note that composition works from right to left, so first, it will call toInteger and then it will call `toPositive`.
 ```JavaScript
 const positiveInteger = R.compose(
     toPositive,
@@ -668,7 +670,7 @@ positiveInteger("-88"); // 88
 ## Example: format string
 In this scenario, we have three different functions that deal with strings:
 
-- `toLowerCase` converts a given string to lovercase
+- `toLowerCase` converts a given string to lowercase.
 - `firstToUpper` returns a string with the first character in uppercase.
 - `RemoveQuotes` removes quotes from a string.
 
@@ -699,7 +701,7 @@ format("hE\"LlO\""); // "Hello"
 ```
 
 ## Example: logger
-Now let’s imagine that we have to develop a function to create nice log messages, with a prefix, with a date and a custom suffix. But we just have three separate functions that gives us just one piece of the desired result:
+Now let’s imagine that we have to develop a function to create nice log messages, with a prefix, with a date and a custom suffix. But we just have three separate functions that give us just one piece of the desired result:
 ```JavaScript
 import R from "ramda";
 
@@ -726,7 +728,8 @@ logger("it works"); // "Log> 2020-01-10 12:44:33 it works."
 ```
 ## Example: params_list
 Sometimes we need to extract some data from a string, and we can apply split to function to reach some part of it. If we don’t use regex, we could compose other functions to create a function to extract that data.
-We start with three simple functions, one to decode urls, another to get the query string of a url and the last to get the parameters.
+We start with three simple functions, one to decode URLs, another to get the query string of a URL and the last to get the parameters.
+
 ```JavaScript
 import R from "ramda";
 
@@ -754,7 +757,8 @@ paramsList("http://88.com/?id=42&name=me"); // ["id", "name"]
 ```
 
 ## Pipe instead of compose
-An alternate way to achieve composition is to use pipe instead of compose. It has the same effect but when we use pipe me have to reverse the order of the functions we want to compose:
+An alternate way to achieve composition is to use `pipe` instead of `compose`. It has the same effect but when we use `pipe` me have to reverse the order of the functions we want to compose:
+
 ```JavaScript
 const paramsList = R.pipe(decode, getQuery, getParams);
 ```
@@ -763,13 +767,13 @@ So:
 write your functions in a way that they can be combined. This is the way.
 
 # Currying
-Currying takes a function with n parameters and turns it into n functions with a single parameters. 
+Currying takes a function with n parameters and turns it into n functions with a single parameter. 
 
 ![WAT](img/mindblow.png)
 
 It may sound crazy at first, but it’s just another technique for code reuse.
 
-Currying it’s a basic tool to create new code, just as we do with composition, and also allows us to create nice expressions to map over data.
+Currying it’s a basic tool to create new code, just as we do with composition, and it also allows us to create nice expressions to map over data.
 As a simple example, we have a function that calculates a final prize given the prize, discount and taxes:
 ```JavaScript
 const total = (tax, discount, amount) => { … }
@@ -789,7 +793,7 @@ As we did in the composition topic, let’s see some scenarios. Once again, it w
 https://codesandbox.io/s/fpjscurrying-97hte
 
 ## Example: increment
-The simplest example possible. We have a classic function that adds two values. 
+This is the simplest example possible. We have a classic function that adds two values. 
 ```JavaScript
 import R from "ramda";
 
@@ -797,7 +801,7 @@ function add(a, b) {
   return a + b;
 }
 ```
-Now we would like to create a new function that just incremements a value. 
+Now we would like to create a new function that just increments a value. 
 Solution:
 ```JavaScript
 const curriedAdd = R.curry(add);
@@ -895,7 +899,7 @@ function curriedHTML(tag) {
 const div = curriedHTML("div")(false);
 ```
 
-So… immutability, pure functions, composition and currying. They are useful concepts on their own. But when we combine them together we can build great things. And for functional programming, these are definitely the building blocks that we will use.
+So… immutability, pure functions, composition, and currying. They are useful concepts on their own. But when we combine them together we can build great things. And for functional programming, these are the building blocks that we will use.
 
 # Sample Applications
 
@@ -913,11 +917,11 @@ Awesome, right? Thanks to this cutting-edge piece of technology I’m so loaded 
 
 ### Initial Model
 
-We have to think about the model, a data structure that will containt the whole state of the app. In this case, there is just one piece of data: current color. Therefore, the model in this case will be just a string containing the name of the color, and its initial value will be “orange”.
+We have to think about the model, a data structure that will contain the whole state of the app. In this case, there is just one piece of data: the current color. Therefore, the model, in this case, will be just a string containing the name of the color, and its initial value will be “orange”.
 
 ### View
 
-The view will contain functions to generate the user interface. This will make use of hyperscript, and it will create a piece of HTML using model data. It’s a pure function that receives some parameters and will return the view using those parameters.
+The view will contain functions to generate the user interface. This will make use of Hyperscript, and it will create a piece of HTML using model data. It’s a pure function that receives some parameters and will return the view using those parameters.
 
 ```JavaScript
 import hh from "hyperscript-helpers";
@@ -942,7 +946,7 @@ The view function doesn’t know what is the purpose of change, but it’s easy 
 
 ### Update
 
-This update function is a pure function that given a model and a value, it will return a new model.  If the value we pass in included in the allowed colors, that value will be returned. If not, the original model will be 
+This update function is a pure function that given a model and a value, it will return a new model.  If the value we pass is included in the allowed colors, that value will be returned. If not, the original model will be 
 returned.
 
 ```JavaScript
@@ -954,15 +958,15 @@ function update (value, model) {
 }
 ```
 
-Don’t let the name update confuse you. If you observe again, the function is pure. It doesn’t change any state from the outside. It just return values depending on the parameters, and that return will be used as a new model.
+Don’t let the name update confuse you. If you observe again, the function is pure. It doesn’t change any state from the outside. It just returns values depending on the parameters, and that returned value will be used as a new model.
 
 That model will be used somewhere else to update the state of the app. This project executes that change in a single place, isolating state management from the rest of the app.
 
 ### Init
 
-An here is where we wire up the view and the model. A single function that loads the view with the initial model and the change function, adds it to a HTML document and most importantly: it defines the change function.
+An here is where we wire up the view and the model. A single function that loads the view with the initial model and the change function, adds it to an HTML document and most importantly: it defines the change function.
 
-The change function inside init is the responsible for the updates on the state. This change function is the function that is passed to the view to create buttons that will call it. 
+The change function inside init is responsible for the updates on the state. This change function is the function that is passed to the view to create buttons that will call it. 
 
 ```JavaScript
 import { diff, patch } from "virtual-dom";
@@ -991,9 +995,9 @@ model = update(value, model);
 - Using the diff function we’ll detect changes in the DOM of the HTML document.
 - Using virtualDOM, we update the HTML document through the patch function.
 
-Everytime that the user interacts with the app, this change function will be called and this process will be repeated. Maybe it sounds familiar? Sure, this is what React does!
+Every time that the user interacts with the app, this change function will be called and this process will be repeated. Maybe it sounds familiar? Sure, this is what React does!
 
-Next this is how we start the app: we choose an element of the DOM and we use it to init the app with an initial model (“orange”). We also provide update and view pure functions.
+Next, this is how we start the app: we choose an element of the DOM and we use it to init the app with an initial model (“orange”). We also provide the `update` and the `view` pure functions.
 
 
 ```JavaScript
@@ -1020,7 +1024,7 @@ The HTML is pretty simple in this case. We just need an element with an id calle
 ```
 
 ## Yet another Todo list
-Yeah I know, a Todo list. How original. But the previous project made me millonaire so I don’t really care. The truth is that we just need an example of a project that manages a list of data.
+Yeah I know, a Todo list. How original. But the previous project made me a millionaire so I don’t really care. The truth is that we just need an example of a project that manages a list of data.
 
 ![Looks so awful that I'm crying](img/app2_1.png)
 
@@ -1028,9 +1032,11 @@ But hey, if you are tired by now, we have good news for you: this project follow
 
 ### Initial Model
 
-The model must be able to contain and reflect the state of the program at any time. Well, in an interpreted language like JavaScript it’s easy to grow any data structure but we should think carefully on how the model should look like.
-In this particular case, we need a model that holds an arrays of tasks. Each task just have a couple of attributes: name and done. There is something else in the model that may not look so obvious at first sight: name and done attributes. Whaaaat?
-Well, this model must be able to reflect the state of the program isn’t it? So those attributes will contain the data introduced in the forms whenever we want to add new data.
+The model must be able to contain and reflect the state of the program at any time. Well, in an interpreted language like JavaScript it’s easy to grow any data structure but we should think carefully about how the model should look like.
+
+In this particular case, we need a model that holds an array of tasks. Each task just has a couple of attributes: `name` and `done`. There is something else in the model that may not look so obvious at first sight: name and done attributes. Whaaaat?
+
+Well, this model must be able to reflect the state of the program, isn’t it? So those attributes will contain the data introduced in the forms whenever we want to add new data.
 
 ```JavaScript
 const initModel = {
@@ -1044,14 +1050,14 @@ const initModel = {
 
 export default initModel;
 ```
-In this app the view will show the value of the model at the bottom. This will come in handy to confirm how the state evolves:
+In this app, the view will show the value of the model at the bottom. This will come in handy to confirm how the state evolves:
 
 ### View
-Here we go again with the view. This will be a piece of cake, but in this case we will need to split the view in more functions because the user interface takes much more work. The names of the functions should be clear enough to understand.
+Here we go again with the view. This will be a piece of cake, but in this case, we will need to split the view into more functions because the user interface takes much more work. The names of the functions should be clear enough to understand.
 
-As we said in the description of this project, there will be more places where we will try to change the state: when we add a message, when we delete one and when we edit the form. We well notify those changes using the change function used before, but in this case we will append a message that will allow us to pass parameters and most importantly, to specify what kind of operation we want to perform.
+As we said in the description of this project, there will be more places where we will try to change the state: when we add a message, when we delete one and when we edit the form. We will notify those changes using the change function used before, but in this case, we will append a message that will allow us to pass parameters and most importantly, to specify what kind of operation we want to perform.
 
-So, again, this view functions will be purely pure and immaculate. But obviously there will be attributes for certain events that will trigger state changes.
+So, again, this view functions will be purely pure and immaculate. But obviously, there will be attributes for certain events that will trigger state changes.
 
 ```JavaScript
 import hh from "hyperscript-helpers";
@@ -1114,7 +1120,7 @@ export default view;
 ```
 
 ### Update
-The update gets bigger but don’t worry, because we will keep all functions clean. 
+The update gets bigger but you don't have to worry, because we will keep all functions clean. 
 
 First of all, we create a simple hash-like structure to contain all possible messages. This is convenient because the message type will be referenced in three places, at least:
 
@@ -1125,7 +1131,7 @@ export const MSG = {
   INPUT: "input"
 };
 ```
-Then, for each message type we create a function that receives a parameter and creates a message. This function will be called by the view and a message will be returned from it. Each message contains a type (used in update function to decide what to do) and in some case some extra info that can be used in the update process.
+Then, for each message type, we create a function that receives a parameter and creates a message. This function will be called by the view and a message will be returned from it. Each message contains a type (used in update function to decide what to do) and in some cases some extra info that can be used in the update process.
 
 ```JavaScript
 export function deleteMsg(index) {
@@ -1146,9 +1152,9 @@ export function addMsg() {
     }
 }
 ```
-And finally, the update function. We need to do it bigger than the previous project, because it must take care of each message type. It also receives the model with the current state.
+And finally, the update function. We need to do it bigger than the previous project because it must take care of each message type. It also receives the model with the current state.
 
-Inside the update, depending on the message type we create a new model based in the original. That model will be used somewhere else were the state is changed in a isolate place:
+Inside the update, depending on the message type we create a new model based in the original. That model will be used somewhere else where the state is changed in an isolated place:
 
 ```JavaScript
 export function update(msg, model) {
@@ -1172,17 +1178,17 @@ export function update(msg, model) {
 }
 export default update;
 ```
-Even if it shows that ugly switch/case structure, update function is still perfectly pure and easy to test. There are alternate ways to write that and avoid the switch/case don’t worry. We could also extract the code from each case too. The point here is that, update returns a new model for each message or it just returns the model as it was.
+Even if it shows that ugly switch/case structure, the `update` function is still perfectly pure and easy to test. There are alternate ways to write that and avoid the switch/case don’t worry. We could also extract the code from each case too. The point here is that `update` returns a new model for each message or it just returns the model as it was.
 
-Does this update sound familiar? This is, in essence, what **Redux** does. Redux can be used in React applications to isolate state management from components. With Redux, a React component (that looks slightly like our views here), binds state values with a centralized store and events are dispatched like messages to the update function. In short, it separate state from the components.
+Does this update sound familiar? This is, in essence, what **Redux** does. Redux can be used in React applications to isolate state management from components. With Redux, a React component (that looks slightly like our views here), binds state values with a centralized store and events are dispatched like messages to the update function. In short, it separates the state from the components.
 
-When the state structure gets too complex, there are tools to normalize the state: this tools transform a nested state into flat objects, making the state easier to manage.
+When the state structure gets too complex, there are tools to normalize the state: these tools transform a nested state into flat objects, making the state easier to manage.
 
 Who will change the state? 
 
 ### App
 
-Suprise it’s me, the app! And what? Yes it’s exactly the same code from the simple project. State changes continue isolated here in this simple file. In the meantime, we see that we were able to create a much more complex app with
+Surprise it’s me, the app! And what? Yes, it’s exactly the same code from the simple project. State changes continue isolated here in this simple file. In the meantime, we see that we were able to create a much more complex app with
 
 ```JavaScript
 import { diff, patch } from "virtual-dom";
