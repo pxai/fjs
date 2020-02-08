@@ -1,11 +1,14 @@
 import R from "ramda";
 import Either from "folktale/result";
-import { compose } from "folktale/core/lambda";
+import { compose, curry } from "folktale/core/lambda";
+import M from "minimatch";
 
-const get = name => obj => obj.name;
+const add = greet => str => greet + str;
+//const get = curry(2, (x, y) => x[value][y]);
+const get = name => obj => obj.value[name];
 
 const showWelcome = compose(
-  R.add("Welcome "),
+    add("Welcome "),
     get("name")
 );
 
@@ -13,8 +16,7 @@ const checkActive = function(user) {
   return user.active ? Either.Ok(user) : Either.Error("Invalid user");
 };
 
-const map = R.curry(function(fn, obj) {
-console.log("fn", fn.toString(), "obj:", obj.map);
+const map = curry(2, function(fn, obj) {
   return obj.map(fn)
 });
 
