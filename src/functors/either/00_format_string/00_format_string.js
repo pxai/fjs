@@ -25,7 +25,7 @@ const map = curry(2, function(fn, obj) {
   };
 */
 const formatString = compose(
-  map(showWelcome),
+  showWelcome,
   checkActive
 );
 
