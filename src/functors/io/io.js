@@ -1,17 +1,13 @@
-const login_io = IO(function(){ return document.getElementById("login").value; });
+import { IO } from "monet";
+import { compose, curry } from "folktale/core/lambda";
+import { mapEntries, mapValues } from "folktale/core/object";
 
-const msg_io ? map(concat("Hello"), login_io);
+const name_io = IO(function() {
+  return document.getElementById("name").value;
+});
 
-runIO(msg_io); // "Hello falken"
+const concat = x => y => x + y;
 
-// other option for login_io so we can pass parameters
-const getLogin = function(selector){ return document.getElementById(selector).value}.toIO()
+const greet_io = mapValues(concat("Hello"), name_io);
 
-runIO(msg_io); // "Hello falken"
-
-const getBgColor = compose(get("background-color", JSON.parse));
-const bgPref = compose(map(getBgColor), window.localStorage.get("preferences"));
-
-const app = bgPref(); // IO();
-
-runIO(app); // #efefef
+export { name_io, greet_io };
