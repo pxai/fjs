@@ -6,7 +6,7 @@ import { showWelcome, checkActive, formatString, get } from "../../../../../src/
 describe("formatString", () => {
   it("get works", () => {
     const object = { active: true, name: "pello" };
-    expect(get("name")(Either.Ok(object))).toEqual("pello");
+    expect(get("name")(Either.Ok(object).value)).toEqual("pello");
   });
 
   describe("checkActive", () => {
@@ -24,16 +24,16 @@ describe("formatString", () => {
   describe("showWelcome", () => {
     it("returns welcomed", () => {
       const object = { active: true, name: "pello" };
-      expect(showWelcome(Either.Ok(object))).toEqual("Welcome pello");
+      expect(Either.Ok(object).map(showWelcome)).toEqual(Either.Ok("Welcome pello"));
     });
 
     it("returns welcomed", () => {
-      expect(showWelcome(Either.Error("Invalid user"))).toEqual("Welcome undefined");
+      expect(Either.Error("Invalid user").map(showWelcome)).toEqual(Either.Error("Invalid user"));
     });
   });
 
-  it("returns ok when age is present", () => {
+  it("returns ok when active is present", () => {
       const object = { active: true, name: "pello" };
-      expect(formatString(object)).toEqual("Welcome pello");
+      expect(formatString(object).value).toEqual("Welcome pello");
   });
 });

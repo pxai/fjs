@@ -3,9 +3,13 @@ import Either from "folktale/result";
 import { compose, curry } from "folktale/core/lambda";
 import M from "minimatch";
 
-const add = greet => str => greet + str;
-//const get = curry(2, (x, y) => x[value][y]);
-const get = name => obj => obj.value[name];
+const add = curry(2, function(prefix, name) {
+  return prefix + name;
+});
+
+const get = curry(2, function (name , obj) {
+  return obj[name];
+});
 
 const showWelcome = compose(
     add("Welcome "),
@@ -20,12 +24,8 @@ const map = curry(2, function(fn, obj) {
   return obj.map(fn)
 });
 
-/*_Maybe.prototype.map = function(fn) {
-    return this.value ? Maybe(fn(this.value)) : Maybe(null);
-  };
-*/
 const formatString = compose(
-  showWelcome,
+  map(showWelcome),
   checkActive
 );
 

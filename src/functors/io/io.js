@@ -8,6 +8,6 @@ const name_io = IO(function() {
 
 const concat = x => y => x + y;
 
-const greet_io = mapValues(concat("Hello"), name_io);
+const greet_io = () => mapValues(concat("Hello"), name_io);
 
 export { name_io, greet_io };

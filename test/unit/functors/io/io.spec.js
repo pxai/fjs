@@ -1,5 +1,6 @@
 import { name_io, greet_io } from "../../../../src/functors/io/io";
 import expect from "expect";
+import { IO } from "monet";
 
 describe("io", () => {
 
@@ -19,13 +20,14 @@ describe("io", () => {
     });
 
     describe("greet_io", () => {
-        it.skip("should be an object", () => {
+        it("should be an object", () => {
             console.log(greet_io);
-            expect(greet_io).toBe({});
+            expect(typeof greet_io).toBe("function");
         });
 
-        it("should return a value", () => {
-            //expect(greet_io).toBe("Nothing here");
+        it.skip("should return a value", () => {
+            const app = IO(greet_io);
+            expect(app.run()).toBe("function");
         });
     });
 })
