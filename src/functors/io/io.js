@@ -1,13 +1,16 @@
 import { IO } from "monet";
 import { compose, curry } from "folktale/core/lambda";
-import { mapEntries, mapValues } from "folktale/core/object";
 
-const name_io = IO(function() {
+const name_io = ()=> IO(function() {
   return document.getElementById("name").value;
 });
 
-const concat = x => y => x + y;
+const map = curry(2, function(fn, obj) {
+    console.log("Mapping: ", fn, " over ", obj);
+    return obj.map(fn)
+});
+const shout = msg => msg.toUpperCase();
 
-const greet_io = () => mapValues(concat("Hello"), name_io);
+const greet_io = compose(map(shout), name_io);
 
 export { name_io, greet_io };
