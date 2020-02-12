@@ -11,11 +11,12 @@ describe("io", () => {
 
     describe("name_io", () => {
         it("should be an object", () => {
-            expect(typeof name_io).toBe("object");
+            console.log("SHOW ME: ",name_io);
+            expect(typeof name_io).toBe("function");
         });
 
         it("should return a value", () => {
-            expect(name_io.run()).toBe("Pablete");
+            expect(name_io().run()).toBe("Pablete");
         });
     });
 
@@ -25,9 +26,8 @@ describe("io", () => {
             expect(typeof greet_io).toBe("function");
         });
 
-        it.skip("should return a value", () => {
-            const app = IO(greet_io);
-            expect(app.run()).toBe("function");
+        it("should return a value", () => {
+            expect(greet_io().run()).toBe("PABLETE");
         });
     });
 })
