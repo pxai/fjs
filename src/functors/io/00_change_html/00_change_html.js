@@ -1,8 +1,9 @@
 import { IO } from "monet";
 import { compose, curry } from "folktale/core/lambda";
 
-const name_io = () => IO(function() {
-  return document.getElementById("name").value;
+const html_io = (tag) => IO(function() {
+  console.log("Asked tag: ", tag);
+  return document.querySelector(tag).innerHTML;
 });
 
 const map = curry(2, function(fn, obj) {
@@ -11,6 +12,6 @@ const map = curry(2, function(fn, obj) {
 
 const shout = msg => msg.toUpperCase();
 
-const greet_io = compose(map(shout), name_io);
+const greet_io = compose(map(shout), html_io);
 
-export { name_io, greet_io };
+export { html_io, greet_io };

@@ -1,21 +1,20 @@
-import { name_io, greet_io } from "../../../../src/functors/io/io";
+import { html_io, greet_io } from "../../../../../src/functors/io/00_change_html/00_change_html";
 import expect from "expect";
-import { IO } from "monet";
 
-describe("io", () => {
+describe("00_change_html", () => {
 
     beforeEach(() =>{
         const windowRef = global.window;
-        global.document = {getElementById: () => { return { value: "Pablete"} } };
+        global.document = {querySelector: () => { return { innerHTML: "SuperTitle"} } };
     });
 
     describe("name_io", () => {
         it("should be an object", () => {
-            expect(typeof name_io).toBe("function");
+            expect(typeof html_io).toBe("function");
         });
 
         it("should return a value", () => {
-            expect(name_io().run()).toBe("Pablete");
+            expect(html_io().run()).toBe("SuperTitle");
         });
     });
 
@@ -25,7 +24,7 @@ describe("io", () => {
         });
 
         it("should return a value", () => {
-            expect(greet_io().run()).toBe("PABLETE");
+            expect(greet_io("h1").run()).toBe("SUPERTITLE");
         });
     });
 })
