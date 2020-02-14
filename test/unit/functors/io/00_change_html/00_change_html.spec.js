@@ -2,10 +2,14 @@ import { html_io, greet_io } from "../../../../../src/functors/io/00_change_html
 import expect from "expect";
 
 describe("00_change_html", () => {
-
+    let windowRef;
     beforeEach(() =>{
-        const windowRef = global.window;
+        windowRef = global.window;
         global.document = {querySelector: () => { return { innerHTML: "SuperTitle"} } };
+    });
+
+    afterEach(() =>{
+        global.window = windowRef;
     });
 
     describe("name_io", () => {
