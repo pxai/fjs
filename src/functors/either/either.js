@@ -1,6 +1,7 @@
 import Either from "folktale/result";
 import { compose, curry } from "folktale/core/lambda";
 import { mapEntries, mapValues } from "folktale/core/object";
+// https://folktale.origamitower.com/
 
 const determineAge = function(user) {
   return user.age ? Either.Ok(user.age) : Either.Error("Don't have age");

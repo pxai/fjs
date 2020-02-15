@@ -2,7 +2,6 @@ import { IO } from "monet";
 import { compose, curry } from "folktale/core/lambda";
 
 const html_io = (tag) => IO(function() {
-  console.log("Asked tag: ", tag);
   return document.querySelector(tag).innerHTML;
 });
 
