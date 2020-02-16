@@ -1,23 +1,24 @@
-// eventStream: run a function everytime something happens
-// Bacon: eventStream library, event delegation
-// id stream
-const id_s = map(function (event) { return "#"+ event.id}, Bacon.fromEventTarget(document, "click"))
-// EventStream(String) : an event stream of string, lazy, just starts a suscription
+import * as Bacon from "baconjs";
 
-id_s.onValue(function(id){ console.log("You clicked ", id)}) // here starts listening
+const map = function(fn, obj) {
+  return obj.map(fn);
+};
 
-// element stream of elements
-const element_s = map(document.querySelector, id_s); // EventStream(Element)
-element_s.onValue(function(element){ console.log("Inner is: ", element.innerHTML)}); // subscribe and start
+const idStream = map(function(event) {
+  return "#" + event.target.id;
+}, Bacon.fromEvent(document, "click"));
 
-// we can keep mapping and it keeps transforming the event stream
-const hover_s = Bacon.fromEventTarget(document, "hover");
-const element_s = map(compose(document.querySelector, get("id")), hover_s);
-const postid_s = map(function(element){ return element.data("post-id")}, element_s );
-const future_post_s = map(Api.getProductById, postid_s) // EventStream(Future(Post))
+idStream.onValue(function(id) {
+  console.log("You clicked ", id);
+  return id;
+});
 
-future_post_s.onValue(alert );
+const elementStream = map(function(id) {
+  return document.querySelector(id);
+}, idStream);
 
+elementStream.onValue(function(element) {
+  console.log("Inner is: ", element.innerHTML);
+});
 
-
-
+export { idStream, elementStream };
