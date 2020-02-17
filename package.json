@@ -21,6 +21,7 @@
     "folktale": "^2.3.2",
     "hyperscript": "^2.0.2",
     "hyperscript-helpers": "^3.0.3",
+    "monet": "^0.9.1",
     "ramda": "^0.26.1",
     "tachyons": "^4.11.1"
   },

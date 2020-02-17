@@ -1,18 +1,32 @@
-// future: like a lazy promise api request/readfile
-// it already has an IO
-const makeHtml = function(post) { return "<div>"+post.title+"</div>"};
-const page_f = map(makeHTML, http.get('/posts/2')); // map over eventual result
+import { task } from "folktale/concurrency/task";
 
-// futures may fail so they hay IO and maybe
-// Impure at the end:
-page_f.fork(function(error) {throw(error)},
-            function(page){ $("#container").html(page)});
+const map = function(fn, obj) {
+  return obj.map(fn);
+};
 
-//  Other:
-const makeHtml = function(title) { return "<div>"+title+"</div>"};
-const createPage = map(makeHTML, get('title')); 
-const page_f = compose(map(createPage), http.get('/posts/2'));
+const add = x => y => x + y;
+const one = task(resolver => resolver.resolve(1));
 
-// Impure part
-page_f.fork(function(error) {throw(error)},
-            function(page){ $("#container").html(page)});
+const inc = map(add(1), one);
+
+one.run().listen({
+  onCancelled: () => {
+    console.log("the task was cancelled");
+  },
+  onRejected: error => {
+    console.log("something went wrong");
+  },
+  onResolved: value => {
+    console.log(`The value is ${value}`);
+  }
+});
+
+inc
+  .run()
+  .future()
+  .map(value => {
+    console.log("Value: ", value);
+  });
+
+
+  export { one, inc};
