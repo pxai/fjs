@@ -5,11 +5,11 @@ const id = function (x) {
     return x;
 }
 
-var chain = R.curry(function(mv, f) {
+const chain = R.curry(function(mv, f) {
     return mv.chain(f);
 });
 
-var mjoin = function(mmv) {
+const mjoin = function(mmv) {
     return chain(mmv, R.identity);
 };
 
