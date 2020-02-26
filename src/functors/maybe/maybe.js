@@ -8,7 +8,7 @@ const Maybe = function(x) {
   return new _Maybe(x);
 };
 
-console.log(Maybe(42)); // { value: 42 }
+// Maybe(42);   { value: 42 }
 
 _Maybe.prototype.map = function(fn) {
   return this.value ? Maybe(fn(this.value)) : Maybe(null);
@@ -16,9 +16,8 @@ _Maybe.prototype.map = function(fn) {
 
 const capitalize = x => x.toUpperCase();
 
-const result = Maybe("sample").map(capitalize);
+const result = Maybe("sample").map(capitalize); // { value: 'SAMPLE' }
 
-console.log(result);
 
 const map = R.curry(function(fn, obj) {
   return obj.map(fn);
@@ -27,7 +26,6 @@ const map = R.curry(function(fn, obj) {
 const add = R.add;
 
 Maybe(665).map(add(1)); // Maybe(666)
-
 map(add(1), Maybe(665)); // Maybe(666)
 
 export { Maybe, map, add };
