@@ -24,9 +24,6 @@ one.run().listen({
 inc
   .run()
   .future()
-  .map(value => {
-    console.log("Value: ", value);
-  });
+  .map(value => console.log("Value: ", value));
 
-
-  export { one, inc};
+export { one, inc };
