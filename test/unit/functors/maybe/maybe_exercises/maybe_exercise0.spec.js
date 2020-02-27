@@ -11,5 +11,9 @@ it("Should return a Maybe with null", () => {
 });
 
 it("Should trim a string", () => {
-  expect(cleanString("  it works!  ")).toEqual({ value: "it works!" });
+  expect(cleanString("  it works!  ")).toEqual(Maybe("it works!"));
+});
+
+it("Should not trim", () => {
+  expect(cleanString(666)).toEqual(Maybe(null));
 });

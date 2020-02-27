@@ -1,7 +1,7 @@
 import { Maybe, map } from "../maybe";
 import * as R from "ramda"; 
 
-// Create a function called safe integer that returns
+// Create a function called safeInteger that returns
 // a Maybe with a positive integer or Maybe null
 const safeInteger = function (number) {
     return typeof number === "number" && number >= 0 ? Maybe(number) : Maybe(null);
