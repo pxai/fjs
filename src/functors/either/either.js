@@ -1,6 +1,5 @@
 import Either from "folktale/result";
 import { compose, curry } from "folktale/core/lambda";
-import { mapEntries, mapValues } from "folktale/core/object";
 // https://folktale.origamitower.com/
 
 const determineAge = function(user) {
@@ -17,4 +16,4 @@ const yearOlder = compose(
   determineAge
 );
 
-export { determineAge, yearOlder, add };
+export { determineAge, yearOlder, add, map };

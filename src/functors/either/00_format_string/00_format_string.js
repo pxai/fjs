@@ -1,7 +1,6 @@
-import R from "ramda";
 import Either from "folktale/result";
 import { compose, curry } from "folktale/core/lambda";
-import M from "minimatch";
+
 
 const add = curry(2, function(prefix, name) {
   return prefix + name;
