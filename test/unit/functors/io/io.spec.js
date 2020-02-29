@@ -3,10 +3,15 @@ import expect from "expect";
 import { IO } from "monet";
 
 describe("io", () => {
-
-    beforeEach(() =>{
-        const windowRef = global.window;
+    let documentRef;
+    
+    before(() =>{
+        documentRef = global.document;
         global.document = {getElementById: () => { return { value: "Pablete"} } };
+    });
+
+    after(() =>{
+        global.documentRef = documentRef;
     });
 
     describe("name_io", () => {
