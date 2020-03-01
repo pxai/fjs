@@ -2,7 +2,7 @@ import { IO } from "monet";
 import { compose, curry } from "folktale/core/lambda";
 
 const getValueIO = (input) => IO(function() {
-  return document.querySelector(input).value;
+  return { color: document.querySelector(input).value };
 });
 
 const toString = (value) => {
@@ -10,7 +10,7 @@ const toString = (value) => {
 }
 
 const saveStorageIO = (value) => IO(function() {
-  return window.localStorage.set("property", value);
+  return window.localStorage.setItem("color", value);
 });
 
 const map = curry(2, function(fn, obj) {

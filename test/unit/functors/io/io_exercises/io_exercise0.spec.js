@@ -6,7 +6,7 @@ describe("ioexercise0", () => {
     
     before(() =>{
         windowRef = global.window;
-        global.window = { localStorage: { get: (key) => { return { color: "red"} } } };
+        global.window = { localStorage: { getItem: (key) => { return '{"color":"red"}' } } };
     });
 
     after(() =>{
@@ -19,13 +19,13 @@ describe("ioexercise0", () => {
         });
 
         it("should return a property", () => {
-            expect(getStorageIO().run()).toEqual({ color: "red" });
+            expect(getStorageIO().run()).toEqual('{"color":"red"}');
         });
     });
 
     describe("getColor", () => {
         it("should return a property", () => {
-            expect(getColor({ color: "fuchsia"})).toBe("fuchsia");
+            expect(getColor('{"color":"fuchsia"}')).toBe("fuchsia");
         });
     });
 
