@@ -6,19 +6,12 @@ const map = function(fn, obj) {
 
 const idStream = map(function(event) {
   return "#" + event.target.id;
-}, Bacon.fromEvent(document, "click"));
+}, Bacon.fromEvent(document.querySelector("#app"), "click"));
 
+// Impure
 idStream.onValue(function(id) {
   console.log("You clicked ", id);
   return id;
 });
 
-const elementStream = map(function(id) {
-  return document.querySelector(id);
-}, idStream);
-
-elementStream.onValue(function(element) {
-  console.log("Inner is: ", element.innerHTML);
-});
-
-export { idStream, elementStream };
+export { idStream, map };
