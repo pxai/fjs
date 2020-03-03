@@ -4,7 +4,7 @@ import {
     findOrder,
     getOrderTracking,
     renderTemplate
-  } from "./monads2";
+  } from "../../../src/monads/monads2";
   import Maybe from "./maybe";
   
   it("Should return stuff", () => {

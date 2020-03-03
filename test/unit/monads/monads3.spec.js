@@ -1,4 +1,4 @@
-import { getTitle, setTitle, initTitle } from "./monads3";
+import { getTitle, setTitle, initTitle } from "../../../src/monads/monads3";
 import { IO } from "monet";
 
 describe("io", () => {

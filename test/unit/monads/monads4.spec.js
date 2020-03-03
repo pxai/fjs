@@ -1,4 +1,4 @@
-import { format, numb, ghLogin } from "./monads4";
+import { format, numb, ghLogin } from "../../src/monads/monads4";
 
 describe("monads4", () => {
   describe("format", () => {
