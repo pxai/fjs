@@ -5,6 +5,10 @@ const map = function(fn, obj) {
 };
 
 const getSelectedValue = event => event.target.value;
+
+// create a stream of hero names mapping over
+// getSElectedValue and the events coming from 
+// from the select change
 const heroStream = map(
   getSelectedValue,
   Bacon.fromEvent(document.querySelector("#heroes"), "change")
