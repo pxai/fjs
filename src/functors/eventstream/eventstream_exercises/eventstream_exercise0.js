@@ -1,8 +1,5 @@
+import { map } from "../eventstream";
 import * as Bacon from "baconjs";
-
-const map = function(fn, obj) {
-  return obj.map(fn);
-};
 
 const getSelectedValue = event => event.target.value;
 

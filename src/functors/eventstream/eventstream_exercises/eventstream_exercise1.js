@@ -1,8 +1,6 @@
+import { map } from "../eventstream";
 import { heroStream } from "./eventstream_exercise0";
 
-const map = function(fn, obj) {
-  return obj.map(fn);
-};
 
 const getElement = value => document.querySelector(`#${value}`);
 // applying map to getElement and heroStream,

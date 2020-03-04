@@ -24,6 +24,7 @@
     "hyperscript-helpers": "^3.0.3",
     "monet": "^0.9.1",
     "ramda": "^0.26.1",
+    "ramda-fantasy": "^0.8.0",
     "tachyons": "^4.11.1"
   },
   "devDependencies": {

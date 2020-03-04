@@ -1,8 +1,5 @@
+import { map } from "../eventstream";
 import * as Bacon from "baconjs";
-
-const map = function(fn, obj) {
-  return obj.map(fn);
-};
 
 const getId = function(event) {
   // console.log("Event: ", event.target, " and", event.target.id);

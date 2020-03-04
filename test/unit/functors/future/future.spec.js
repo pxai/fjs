@@ -1,4 +1,4 @@
-import { one, inc } from "../../../../src/future";
+import { one, inc } from "../../../../src/functors/future";
 
 describe("futures", () => {
   describe("one", () => {
