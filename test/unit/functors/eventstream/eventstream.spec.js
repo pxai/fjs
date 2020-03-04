@@ -1,4 +1,4 @@
-import { idStream, elementStream } from "../../../src/functors/eventstream/eventstream";
+import { idStream, elementStream } from "../../../../src/functors/eventstream/eventstream";
 
 describe("EventStream", () => {
   let windowRef;
