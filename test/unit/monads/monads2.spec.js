@@ -5,6 +5,7 @@ import {
     getOrderTracking,
     renderTemplate
   } from "../../../src/monads/monads2";
+  import expect from "expect";
   import Maybe from "../../../src/monads/maybe";
   
   it("Should return stuff", () => {

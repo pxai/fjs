@@ -9,7 +9,7 @@ const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
-const projects = [ 'app1', 'app2', 'app3' ];
+const projects = [ 'app1', 'app2', 'app3', 'app4' ];
 const mocha = require('gulp-mocha');
 
 function html() {
@@ -91,5 +91,5 @@ exports.css = css;
 exports.html = html;
 const build = series(clean, parallel(html, css, allJs));
 
-exports.default = series(test, build, parallel(watchFiles, browserSync));
+exports.default = series( build, parallel(watchFiles, browserSync));
 exports.build;

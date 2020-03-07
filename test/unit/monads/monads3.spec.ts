@@ -1,7 +1,16 @@
 import { getTitle, setTitle, initTitle } from "../../../src/monads/monads3";
+import expect from "expect";
 import { IO } from "monet";
 
 describe("io", () => {
+  before(function () {
+    // this.jsdom = require('jsdom-global')()
+  })
+
+  after(function () {
+    // this.jsdom()
+  })
+
   describe("getTitle", () => {
     it("should be an function", () => {
       expect(typeof getTitle).toBe("function");
