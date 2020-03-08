@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pxai/fjs#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "baconjs": "^3.0.12",
     "core-js": "^3.6.1",
     "folktale": "^2.3.2",

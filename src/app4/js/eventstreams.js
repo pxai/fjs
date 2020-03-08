@@ -3,7 +3,7 @@ import { map } from "./utils";
 
 const inputValue = event => event.target.value;
 const addUrl = searchTerm => `https://pokeapi.co/api/v2/pokemon/${searchTerm}`;
-const keypressStream = Bacon.fromEvent(document.querySelector("#search"), "keypress");
+const keypressStream = Bacon.fromEvent(document.querySelector("#search"), "keyup");
 const searchStream = map(inputValue, keypressStream);
 
 

@@ -1,29 +1,25 @@
 import * as R from "ramda";
-import { mjoin, map } from "./utils";
+import axios from "axios";
 import { Future } from "ramda-fantasy";
+import { mjoin, map } from "./utils";
 
-const getPokeApi = name =>
-  Future((reject, resolve) =>
-    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then(data =>
-      resolve(data)
-    )
-  );
+const fetchUrl = (url) => new Future(function(rej, res) {
+    axios
+      .get(url)
+      .then(data => res(data))
+      .catch(err => rej(err));
+});
 
-const getData = data =>
-  Future((reject, resolve) => {
-    console.log("Data: ", data);
-    return resolve(data);
+function getData(data) {
+  return new Future(function(rej, res) {
+    data.data ? res(data.data) : rej({})
   });
+}
 
 const catchPokemon = R.compose(
   mjoin,
   map(getData),
-  getPokeApi
+  fetchUrl
 );
 
-catchPokemon("pikachu").fork(
-  err => console.log("Error: ", err),
-  success => console.log("Success! ", success)
-);
-
-export { getPokeApi, getData, catchPokemon };
+export { fetchUrl, getData, catchPokemon };
