@@ -20,6 +20,4 @@ const clearIO = (content) => IO(function() {
 });
 
 
-const notFoundIO = htmlIO("#name");
-
 export { htmlIO, clearIO, pokemonIO };

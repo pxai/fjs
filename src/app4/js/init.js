@@ -20,8 +20,6 @@ const showIt = R.compose(
 );*/
 
 // IMPURE starts here:(
-// const catchPokemon = (url) => fetchUrl(url).fork(err => Either.Error(err), suc => Either.Ok(suc))
-const catchPokemonF = (url) => catchPokemon(url).fork(err => clearIO().run(), suc => pokemonIO(suc).run());
-// const catchPokemonLog = R.compose(catchPokemonF, log)
-// urlStream.onValue(R.compose(catchPokemonF, log));
-urlStream.onValue(catchPokemonF);
+const search = (url) => catchPokemon(url).fork(err => clearIO().run(), suc => pokemonIO(suc).run());
+const searchLogged = R.compose(search, log)
+urlStream.onValue(search);
