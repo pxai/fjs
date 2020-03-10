@@ -15,5 +15,5 @@ module.exports = {
  timeout: 2000,
  ui: 'bdd',
  'watch-files': ['test/**/*.spec.js'],
- require: '@babel/register'
+ require: '@babel/register, jsdom-global/register'
 };

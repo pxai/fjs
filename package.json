@@ -17,10 +17,15 @@
   },
   "homepage": "https://github.com/pxai/fjs#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "baconjs": "^3.0.12",
     "core-js": "^3.6.1",
+    "folktale": "^2.3.2",
     "hyperscript": "^2.0.2",
     "hyperscript-helpers": "^3.0.3",
+    "monet": "^0.9.1",
     "ramda": "^0.26.1",
+    "ramda-fantasy": "^0.8.0",
     "tachyons": "^4.11.1"
   },
   "devDependencies": {
@@ -48,7 +53,10 @@
     "gulp-mocha": "^7.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "jsdom": "16.2.0",
+    "jsdom-global": "3.0.2",
     "mocha": "^7.0.0",
+    "sinon": "^9.0.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "virtual-dom": "^2.1.1"
